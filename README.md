@@ -9,7 +9,7 @@ Corruption is a huge bane to Africa’s development. African countries must deve
 - Get all incident records
 - Get a specific incident record
 - Edit a specific incident record.
-- Delete an intervention record
+- Delete an incident record
 - Admin can change the status of a record to either under investigation, rejected (in the event of a false claim) or resolved (in the event that the claim has been investigated and resolved).
 
 
