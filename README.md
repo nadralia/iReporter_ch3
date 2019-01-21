@@ -62,7 +62,7 @@ Enter the command below in the terminal to run the tests with coverage using
 
 ```sh
   python -m pytest tests/
-
+```
 
 ### Link to iReporter on Heroku
 
