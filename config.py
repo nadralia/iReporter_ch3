@@ -1,8 +1,10 @@
+from os import environ
+
 class Config(object):
     """
     Common configurations
     """
-    SECRET_KEY = 'mysecretkey'
+    SECRET_KEY = environ.get("SECRET_KEY")
     JWT_ACCESS_TOKEN_EXPIRES = False
     JWT_TOKEN_LOCATION = ['headers']
     JWT_HEADER_NAME = 'Authorization'
