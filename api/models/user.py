@@ -3,6 +3,7 @@ class UserModel:
         """ stores user details """
         self.firstname = kwargs.get('firstname')
         self.lastname = kwargs.get('lastname')
+        self.othernames = kwargs.get('othernames')
         self.email = kwargs.get('email')
         self.username = kwargs.get('username')
         self.password = kwargs.get('password')

@@ -4,7 +4,7 @@ class Config(object):
     """
     Common configurations
     """
-    SECRET_KEY = environ.get("SECRET_KEY")
+    SECRET_KEY = "myscretket2"
     JWT_ACCESS_TOKEN_EXPIRES = False
     JWT_TOKEN_LOCATION = ['headers']
     JWT_HEADER_NAME = 'Authorization'
@@ -16,7 +16,11 @@ class DevelopmentConfig(Config):
     """
     Development configurations
     """
-
+    DATABASE_NAME = "ireporter_db"
+    DATABASE_USER = "postgres"
+    DATABASE_PASSWORD = "nadra2922"
+    DATABASE_HOST = "localhost"
+    DATABASE_PORT = "5432"
     DEBUG = True
 
 

@@ -26,28 +26,19 @@ class Validation:
             return "Password must have atleast 1 number between [0-9]"
         elif not re.search("[$#@]",password):
             return "Password must have atleast 1 character from [$#@]"
-        else:
-            return "Valid Password"
 
-    def validate_user(self, username,email,gender):
+    def validate_user_details(self, username,email,gender):
         """ Validates user fields"""
         if not re.match(r"([\w\.-]+)@([\w\.-]+)(\.[\w\.]+$)",email):
             return "Invalid email format"
         if not re.match(r"([a-zA-Z0-9]*$)", username):
             return "Only alphanumerics allowed in user name"
         if gender != 'Male' and gender != 'Female':
-            return "Genger must be either Male or Female"
-        else:
-            return "is_valid"
+            return "Gender must be either Male or Female"
             
     def validate_login(self, username, password):
         """
         validates the user login input
         """
-        try:
-            if username == "" or password == "":
-                return "Input username or password"
-            else:
-                return "Credentials valid"
-        except KeyError:
-            return "Invalid fields"
+        if username == "" or password == "":
+            return "Input username or password"
