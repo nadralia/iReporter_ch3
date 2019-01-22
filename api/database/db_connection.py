@@ -3,14 +3,23 @@ import psycopg2.extras as extra
 from pprint import pprint
 import os
 
+from config import DevelopmentConfig
+
 
 class DatabaseConnection:
     def __init__(self):
         """Make a connection to the database"""
         try:
-            if os.environ["APP_SETTINGS"] == "TESTING":
+            
+            if os.environ["APP_SETTINGS"] == "DEVELOPMENT":
+                dev_obj = DevelopmentConfig
+                database = dev_obj.DATABASE_NAME
+                user = dev_obj.DATABASE_USER
+                password = dev_obj.DATABASE_PASSWORD
+                host = dev_obj.DATABASE_HOST
+                port= dev_obj.DATABASE_PORT
                 self.con = psycopg2.connect(
-                    database="ireporter_db", user="postgres", password="nadra2922", host="localhost", port="5432")
+                    database=database, user=user, password=password, host=host, port=port)
             else:
                 self.con = psycopg2.connect(
                     database=os.environ["DATABASE_NAME"], user=os.environ["DATABASE_USER"], password=os.environ["DATABASE_PASSWORD"], host=os.environ["DATABASE_HOST"], port=os.environ["DATABASE_PORT"])
@@ -32,7 +41,8 @@ class DatabaseConnection:
                 username VARCHAR (40) UNIQUE NOT NULL,
                 password VARCHAR(255) NOT NULL,
                 phonenumber VARCHAR(14) UNIQUE NOT NULL,
-                isAdmin VARCHAR (5) DEFAULT 'false',
+                gender VARCHAR(14) NOT NULL,
+                is_admin VARCHAR (5) DEFAULT 'false',
                 registered TIMESTAMP WITH TIME ZONE DEFAULT now(),
                 updatedOn TIMESTAMP WITH TIME ZONE DEFAULT now()
             )
