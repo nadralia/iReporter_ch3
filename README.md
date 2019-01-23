@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/nadralia/iReporter_ch3.svg?branch=develop)](https://travis-ci.org/nadralia/iReporter_ch3)
-
+[![Coverage Status](https://coveralls.io/repos/github/nadralia/iReporter_ch3/badge.svg?branch=develop)](https://coveralls.io/github/nadralia/iReporter_ch3?branch=develop)
+[![Maintainability](https://api.codeclimate.com/v1/badges/30e2f57ba86ee7914f00/maintainability)](https://codeclimate.com/github/nadralia/iReporter_ch3/maintainability)
 # iReporter_ch3
 Corruption is a huge bane to Africa’s development. African countries must develop novel and localised solutions that will curb this menace, hence the birth of iReporter. iReporter enables any/every citizen to bring any form of corruption to the notice of appropriate authorities and the general public. Users can also report on things that needs government intervention.
 
@@ -16,9 +17,16 @@ Corruption is a huge bane to Africa’s development. African countries must deve
 
 
 ## API Endpoints
-| Methods | EndPoint                               | Functionality                                   |Access
-| ------- | -------------------------------------- | ----------------------------------------------- |------
-
+| Methods | EndPoint                                | Functionality                                    |Access
+| ------- | --------------------------------------- | -------------------------------------------------|------
+| POST    | /api/v2/auth/signup                     | Sign up a user                                   |PUBLIC
+| POST    | /api/v2/auth/login                      | Login a user                                     |PUBLIC
+| POST    | /api/v2/incidents                       | Create an incident record a user                 |PRIVATE
+| GET     | /api/v2/incidents                       | Fetch all incident records.                      |PRIVATE
+| GET     | /api/v2/incidents/incident_id           | Fetch a specific incident -record                |PRIVATE
+| PATCH   | /api/v2/incidents/incident_id/location  | Edit the location of a specific incident record  |PRIVATE
+| PATCH   | /api/v2/incidents/incident_id/comment   | Edit the comment of a specific  incident record  |PRIVATE
+| DELETE  | /api/v2/incidents/incident_id           | Delete a specific red flag record.               |PRIVATE
 ### Technologies used to build the application
 - `Python3` - A programming language that lets us work more quickly.
 - `Flask` - A microframework for Python based on Werkzeug, Jinja 2 and good intentions.
@@ -64,6 +72,19 @@ Enter the command below in the terminal to run the tests with coverage using
 
 ```sh
   python -m pytest tests/
+```
+## .env Settings 
+
+## Endpoint Examples
+```sh
+{
+   "incident_type": "red-flag",
+   "latitude": "6.5951139",
+   "longitude": "3.3429975",
+   "images": "rigg.jpg",
+   "videos": "goodvideo.mp4",
+   "comment": "Extortion at the NIRA"
+}
 ```
 
 ### Link to iReporter on Heroku
