@@ -76,6 +76,7 @@ Enter the command below in the terminal to run the tests with coverage using
 ## .env Settings 
 
 ## Endpoint Examples
+Post a redflag incident : api/v2/incidents
 ```sh
 {
    "incident_type": "red-flag",
