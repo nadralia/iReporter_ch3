@@ -3,3 +3,7 @@
 __pycache__/
 # Environments
 venv/
+.env
+htmlcov/
+.pytest_cache/
+.coverage

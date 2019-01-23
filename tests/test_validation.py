@@ -13,7 +13,7 @@ class TestValidation(unittest.TestCase):
     def test_if_its_a_validate_password(self):
         password = 'Nadra2922@'
         result = self.validation.validate_password(password)
-        self.assertEqual(result, "Valid Password")
+        self.assertEqual(result, True)
  
     def test_minimum_length_of_password(self):
         password = 'Nadra'

@@ -5,6 +5,16 @@ python:
 install:
   - pip install -r requirements.txt
   - pip install pytest-cov
+
+services:
+  - postgresql
+
+env:
+  global:
+    - APP_SETTINGS="TESTING"
+
+before_script:
+  - psql -c 'create database ireporter_testing;' -U postgres
   
 # command to run tests
 script:

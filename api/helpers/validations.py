@@ -1,4 +1,7 @@
 import re
+from api.helpers.utils import (check_if_input_is_number,
+                                check_if_input_contains_space,
+                                check_if_input_contains_space)
 
 class Validation:
    
@@ -26,6 +29,8 @@ class Validation:
             return "Password must have atleast 1 number between [0-9]"
         elif not re.search("[$#@]",password):
             return "Password must have atleast 1 character from [$#@]"
+        else:
+            return True
 
     def validate_user_details(self, username,email,gender):
         """ Validates user fields"""
@@ -42,3 +47,39 @@ class Validation:
         """
         if username == "" or password == "":
             return "Input username or password"
+
+    def validate_incident(self, incident_type,comment):
+        """ add incident validation."""
+        if comment == "":
+            return "Comment of the incident is missing"
+        if incident_type == "":
+           return "Type of incident is missing"
+        elif str(incident_type).lower() not in (
+            "red-flag",
+            "intervention"
+        ):
+            return "Type of incident must be either Red-flag or Intervention"
+
+    
+    def validate_location(self, latitude, longitude):
+        """ validate latitude and longitude """
+        if not check_if_input_is_number(latitude) or not check_if_input_is_number(longitude):
+            return "location coordinates must be a number"
+    
+    def validate_status(self, status):
+        if not status or not isinstance(status, str):
+            return "Status is missing"
+        elif str(status).lower() not in (
+            "drafted",
+            "resolved",
+            "under investigation",
+            "rejected"
+        ):
+            return "Status must be one of these drafted,resolved,under investigation,rejected"
+    
+    def validate_input_type(self, input):
+        """check if the input values is an integer"""
+        try:
+            _input = int(input)
+        except ValueError:
+            return "Input should be an interger"

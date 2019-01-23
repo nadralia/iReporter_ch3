@@ -16,11 +16,6 @@ class DevelopmentConfig(Config):
     """
     Development configurations
     """
-    DATABASE_NAME = "ireporter_db"
-    DATABASE_USER = "postgres"
-    DATABASE_PASSWORD = "nadra2922"
-    DATABASE_HOST = "localhost"
-    DATABASE_PORT = "5432"
     DEBUG = True
 
 

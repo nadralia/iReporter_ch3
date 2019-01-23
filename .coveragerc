@@ -13,3 +13,5 @@ omit =
     tests/*
     */run.py
     */config.py
+
+show_missing = True
