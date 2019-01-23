@@ -31,12 +31,12 @@ class RegisterUser(MethodView):
             hashed_password = generate_password_hash(password, method='sha256')
 
             #validate user details 
-            validate_password = validate.validate_password(password)
+            invalid_password = validate.validate_password(password)
             invalid = validate.validate_user_details(username,email,gender)
             if invalid:
                 return jsonify({"message": invalid}), 400
-            if validate_password:
-                return jsonify({"message": validate_password}), 400
+            if invalid_password != True :
+                return jsonify({"message": invalid_password}), 400
             username_exists = user_controller.check_if_username_exists(username=username)
             if username_exists:
                 return jsonify({"message": "username exists"}), 409
