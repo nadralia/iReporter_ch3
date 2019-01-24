@@ -23,6 +23,14 @@ class IncidentController:
 
         return True
 
+    def does_incident_exist(self, comment,user_id):
+        """check if incident exists."""
+        incident_exists = self.dbfunctions.does_incident_exist(comment,user_id)
+        if incident_exists:
+            return incident_exists
+        return False
+        
+
     def fetch_all_incidents(self):
         """fetch all available incidents"""
         available_incidents = self.dbfunctions.get_all_incidents()

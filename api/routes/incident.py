@@ -47,7 +47,7 @@ class AddIncident(MethodView):
                                 longitude=longitude,images=images, videos=videos, 
                                 comment=comment ,createdOn=createdOn)
                     if add_incident:
-                        return jsonify({"message": user_id}), 201
+                        return jsonify({"incident":incident_controller.does_incident_exist(comment,user_id)}), 201
                 return jsonify({"message": "user identity unknown"}), 400
 
             return jsonify({"message": "Please use the corrects keys"}), 400
@@ -59,7 +59,7 @@ class AddIncident(MethodView):
 class FetchAllIncidents(MethodView):
     def get(self):
         is_admin = get_current_user_role()
-        if is_admin == True:
+        if is_admin == "True":
             all_incidents = incident_controller.fetch_all_incidents()
             if all_incidents:
                 return jsonify({"available_incidents": all_incidents}), 200
@@ -76,7 +76,7 @@ class FetchAllIncidents(MethodView):
 class FetchSingleIncident(MethodView):
     def get(self, incident_id):
         is_admin = get_current_user_role()
-        if is_admin == True:
+        if is_admin == "True":
             invalid = validate.validate_input_type(incident_id)
             if invalid:
                 return jsonify({"message": invalid}), 400
@@ -102,7 +102,7 @@ class FetchSingleIncident(MethodView):
 class DeleteIncident(MethodView):
     def delete(self, incident_id):
         is_admin = get_current_user_role()
-        if is_admin == True:
+        if is_admin == "True":
             invalid = validate.validate_input_type(incident_id)
             if invalid:
                 return jsonify({"message": invalid}), 400
@@ -129,7 +129,7 @@ class DeleteIncident(MethodView):
 class UpdateIncident(MethodView):
     def put(self, incident_id):
         is_admin = get_current_user_role()
-        if is_admin == True:
+        if is_admin == "True":
             invalid_id = validate.validate_input_type(incident_id)
             if invalid_id:
                 return jsonify({"message": invalid_id}), 400

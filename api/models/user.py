@@ -9,5 +9,4 @@ class UserModel:
         self.password = kwargs.get('password')
         self.phonenumber = kwargs.get('phonenumber')
         self.gender = kwargs.get('gender')
-        self.registered = kwargs.get('registered')
-        self.is_admin = False
+        self.is_admin = kwargs.get('is_admin')
