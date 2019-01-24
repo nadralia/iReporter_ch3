@@ -1,1 +1,0 @@
-CREATE DATABASE ireporter_db
