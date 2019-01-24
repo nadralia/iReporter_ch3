@@ -40,6 +40,8 @@ class Validation:
             return "Only alphanumerics allowed in user name"
         if gender != 'Male' and gender != 'Female':
             return "Gender must be either Male or Female"
+        if not username or username == " ":
+            return "usename is missing"
             
     def validate_login(self, username, password):
         """

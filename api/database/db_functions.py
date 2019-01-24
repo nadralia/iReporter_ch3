@@ -6,14 +6,14 @@ class DBFunctions:
         self.cursor = self.connect.dict_cursor
 
     def add_new_user(self,firstname, lastname, othernames,email, username, 
-        password,phonenumber,gender,registered,is_admin):
+        password,phonenumber,gender,is_admin):
         """ insert a new user in table users"""
         query = (
             """INSERT INTO users (firstname, lastname,othernames, email,username, 
-            password,phonenumber,gender,registered,is_admin) 
-            VALUES ('{}', '{}', '{}', '{}','{}', '{}', '{}', '{}','{}','{}'
+            password,phonenumber,gender,is_admin) 
+            VALUES ('{}', '{}', '{}', '{}','{}', '{}', '{}', '{}','{}'
             )""".format(firstname,lastname,othernames,email, username,password,
-            phonenumber,gender,registered,is_admin))
+            phonenumber,gender,is_admin))
 
         self.cursor.execute(query)
 
@@ -50,6 +50,15 @@ class DBFunctions:
             videos,comment,createdOn))
 
         self.cursor.execute(query)
+    
+    def does_incident_exist(self,comment,user_id):
+        """# check if comment exists."""
+        query = ("""SELECT * FROM incidents where comment = '{}' and createdBy = '{}'""".format(comment,user_id))
+        self.cursor.execute(query)
+        incident = self.cursor.fetchone()
+        if incident:
+            return incident
+        return False
 
     def get_all_incidents(self):
         """function to get all incidents"""

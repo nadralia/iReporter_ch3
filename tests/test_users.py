@@ -1,6 +1,7 @@
 from api.models.user import UserModel
 from tests.base_test import BaseTestCase
-from flask import json
+from run import app
+from flask import jsonify, json
 
 
 class TestUsers(BaseTestCase):
@@ -8,12 +9,19 @@ class TestUsers(BaseTestCase):
         kwargs = {
             "firstname": "Adralia",
             "lastname": "Nelson",
+            "othernames": "Nelson",
             "email": "nadralia@gmail.com",
             "username": "nadralia",
             "password": "nadrA67#ad",
             "phonenumber": "+256770987654",
             "gender": "Male",
-            "registered": "2018-12-20 10:02:49",
-            "is_admin": True
+            "is_admin": "True"
         }
         self.user = UserModel(**kwargs)
+
+    def test_class_instance(self):
+        """Tests that the defined object is an instance of the User class"""
+        self.assertIsInstance(self.user, UserModel)
+
+
+   

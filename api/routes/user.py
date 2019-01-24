@@ -16,7 +16,7 @@ class RegisterUser(MethodView):
     def post(self):
         data = request.get_json()
         search_keys = ("firstname", "lastname", "othernames" ,"email", "username", 
-        "password", "phonenumber","gender")
+        "password", "phonenumber","gender","is_admin")
         if all(key in data.keys() for key in search_keys):
             firstname = data.get("firstname")
             lastname = data.get("lastname")
@@ -26,8 +26,7 @@ class RegisterUser(MethodView):
             password = data.get("password")
             phonenumber = data.get("phonenumber")
             gender = data.get("gender")
-            registered = datetime.now()
-            is_admin = False,
+            is_admin = data.get("is_admin")
             hashed_password = generate_password_hash(password, method='sha256')
 
             #validate user details 
@@ -43,13 +42,15 @@ class RegisterUser(MethodView):
             
             new_user = user_controller.create_new_user(firstname=firstname, lastname=lastname,
                     othernames=othernames,email=email,username=username, password=hashed_password, 
-                    phonenumber=phonenumber,gender=gender,registered=registered,is_admin=is_admin)
+                    phonenumber=phonenumber,gender=gender,is_admin=is_admin) 
+            
             if new_user:
-                return jsonify({"message": "User account created"}), 201
+                user = user_controller.get_user(username=username)
+                return jsonify({"message": "User account created","data":user}), 201
             else:
                 return jsonify({"message": "User not created"}), 400
 
-        return jsonify({"message": "a 'key(s)' is missing in your registration body"}), 400
+        return jsonify({"message": "Please provide the correct keys for the data"}), 400
 
             
        
@@ -91,7 +92,7 @@ class Login(MethodView):
                     return response
                 return jsonify({"message": "Wrong password"}), 400
             return jsonify({"message": "wrong login credentials or user does not exist"}), 400
-        return jsonify({"message": "a 'key(s)' is missing in login body"}), 400
+        return jsonify({"message": "Please provide the correct keys for the data"}), 400
         
 
 login_view = Login.as_view("login_view")

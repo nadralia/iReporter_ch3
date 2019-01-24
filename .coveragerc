@@ -9,6 +9,10 @@ omit =
     */usr/lib/python3/*
     */__init__.py
     */api/helpers/__init__.py
+    */api/helpers/welcome.py
+    */api/helpers/token.py
+    */api/database/*
+    */api/controllers/*
     */api/helpers/errors.py
     tests/*
     */run.py
