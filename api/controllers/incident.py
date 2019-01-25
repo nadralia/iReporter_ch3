@@ -95,4 +95,42 @@ class IncidentController:
         else:
             return False
 
+    def update_comment(self ,user_id,incident_id,comment):
+        """update comment"""
+        update = self.dbfunctions.update_comment(user_id,incident_id,comment)
+        if update:
+            return True
+        else:
+            return False
     
+    def update_location(self ,user_id,incident_id,latitude,longitude):
+        """update location"""
+        update = self.dbfunctions.update_location(user_id,incident_id,latitude,longitude)
+        if update:
+            return True
+        else:
+            return False
+
+    def update_status(self ,incident_id,status):
+        """update status"""
+        update = self.dbfunctions.update_status(incident_id,status)
+        if update:
+            return True
+        else:
+            return False
+    
+    def update_comment_admin(self ,incident_id,comment):
+        """update comment"""
+        update = self.dbfunctions.update_comment_admin(incident_id,comment)
+        if update:
+            return True
+        else:
+            return False
+    
+    def update_location_admin(self ,incident_id,latitude,longitude):
+        """update location"""
+        update = self.dbfunctions.update_location_admin(incident_id,latitude,longitude)
+        if update:
+            return True
+        else:
+            return False

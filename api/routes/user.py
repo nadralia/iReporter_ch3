@@ -1,4 +1,4 @@
-from flask import jsonify, request, Blueprint
+from flask import jsonify, request, Blueprint,make_response
 from werkzeug.security import generate_password_hash, check_password_hash
 from api.helpers.token import generate_token
 from flask.views import MethodView
@@ -46,7 +46,7 @@ class RegisterUser(MethodView):
             
             if new_user:
                 user = user_controller.get_user(username=username)
-                return jsonify({"message": "User account created","data":user}), 201
+                return jsonify({"message": "User account created","user":user}), 201
             else:
                 return jsonify({"message": "User not created"}), 400
 
@@ -69,26 +69,25 @@ class Login(MethodView):
             if invalid:
                 return jsonify({"message": invalid}), 400
 
-            user = user_controller.get_user(username=username)
+            user = user_controller.check_if_username_exists(username=username)
             if user:
                 if username == user["username"] and check_password_hash(user["password"], password):
                     response = (
-                                    jsonify(
-                                        {
-                                            "status": 200,
-                                            "data": [
-                                                {
-                                                    "token": generate_token(
-                                                        user["user_id"], user["is_admin"]
-                                                    ),
-                                                    "user": user,
-                                                    "message": "Logged in successfully",
-                                                }
-                                            ],
-                                        }
-                                    ),
-                                    200,
-                                )
+                                jsonify(
+                                    {
+                                        "status": 200,
+                                        "data": [
+                                            {
+                                                "token": generate_token(
+                                                        user["username"], user["is_admin"]
+                                                ),
+                                                "message": "Logged in successfully",
+                                            }
+                                        ],
+                                    }
+                                ),
+                                200,
+                            )
                     return response
                 return jsonify({"message": "Wrong password"}), 400
             return jsonify({"message": "wrong login credentials or user does not exist"}), 400

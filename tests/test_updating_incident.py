@@ -9,7 +9,6 @@ class TestUpdatingIncidents(BaseTestCase):
 
     def test_updating_incident(self):
         pass
-
     def test_updating_incident_impromper_id(self):
         pass
 

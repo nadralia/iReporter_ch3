@@ -7,10 +7,10 @@ import jwt
 
 secret_key = Config.SECRET_KEY
 
-def generate_token(user_id, isAdmin=False):
+def generate_token(username, isAdmin=False):
     """Generate a token  """
     payload = {
-        "userid": user_id,
+        "username": username,
         "isAdmin": isAdmin,
         "iat": datetime.datetime.utcnow(),
         "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=30),
@@ -63,7 +63,7 @@ def token_required(func):
 
 
 def get_current_user_identity():
-    return decode_token(extract_token())["userid"]
+    return decode_token(extract_token())["username"]
 
 
 def get_current_user_role():
