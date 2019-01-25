@@ -75,7 +75,7 @@ Enter the command below in the terminal to run the tests with coverage using
 ```
 ## .env Settings 
 ```sh
-  export "APP_SETTINGS"="DEVELOPMENT"
+  export "APP_SETTINGS"=""
   export "DATABASE_NAME"=""
   export "DATABASE_USER"=""
   export "DATABASE_PASSWORD"=""
@@ -89,6 +89,27 @@ Enter the command below in the terminal to run the tests with coverage using
    
 
 ## Endpoint Examples
+Signup a user
+```sh
+{
+    "email": "adminireporter@gmail.com",
+    "firstname": "Admin",
+    "gender": "Male",
+    "is_admin": "True",
+    "lastname": "ireporter",
+    "othernames": "",
+    "password": "nadra2526#A",
+    "phonenumber": "+256779004531",
+    "username": "admin007"
+}
+```
+Login a user
+```sh
+{
+    "password": "nadra2526#A",
+    "username": "admin007"
+}
+```
 Post a redflag incident : api/v2/incidents
 ```sh
 {
@@ -103,6 +124,7 @@ Post a redflag incident : api/v2/incidents
 
 ### Link to iReporter on Heroku
 
+https://dbireporter.herokuapp.com/
 
 ## Author
 

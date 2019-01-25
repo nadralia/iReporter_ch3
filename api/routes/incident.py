@@ -198,7 +198,7 @@ class UpdateIncident(MethodView):
             return jsonify({"message": "Please use the corrects keys"}), 400
        
 class EditComment(MethodView):
-    def PATCH(self, incident_id):
+    def patch(self, incident_id):
         is_admin = get_current_user_role()
         if is_admin == "True":
             data = request.get_json()
@@ -225,12 +225,12 @@ class EditComment(MethodView):
                             "incident comment successfully updated.",
                             "incident": incident_controller.get_single_incident_by_user(user_id ,incident_id)
                     }), 200
-            return jsonify({"message": "incident not updated or doesn't exist"}), 400
+            return jsonify({"message": updated_comment}), 400
 
 
 
 class EditLocation(MethodView):
-    def PATCH(self, incident_id):
+    def patch(self, incident_id):
         is_admin = get_current_user_role()
         if is_admin == "True":
             data = request.get_json()
@@ -264,7 +264,7 @@ class EditLocation(MethodView):
 
 
 class EditStatus(MethodView):
-    def PATCH(self, incident_id):
+    def patch(self, incident_id):
         is_admin = get_current_user_role()
         if is_admin == "True":
             data = request.get_json()
@@ -303,13 +303,13 @@ incident_blueprint.add_url_rule(
 
 edit_comment_view = EditComment.as_view("edit_comment_view")
 incident_blueprint.add_url_rule(
-    "/api/v2/incidents/<int:incident_id>/comment", view_func=edit_comment_view, methods=["PATCH"])
+    "/api/v2/incidents/<incident_id>/comment", view_func=edit_comment_view, methods=["PATCH"])
 
 edit_location_view = EditLocation.as_view("edit_location_view")
 incident_blueprint.add_url_rule(
-    "/api/v2/incidents/<int:incident_id>/location", view_func=edit_location_view, methods=["PATCH"])
+    "/api/v2/incidents/<incident_id>/location", view_func=edit_location_view, methods=["PATCH"])
 
 
 edit_status_view = EditStatus.as_view("edit_status_view")
 incident_blueprint.add_url_rule(
-    "/api/v2/incidents/<int:incident_id>/status", view_func=edit_status_view, methods=["PATCH"])
+    "/api/v2/incidents/<incident_id>/status", view_func=edit_status_view, methods=["PATCH"])
