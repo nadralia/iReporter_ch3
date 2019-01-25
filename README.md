@@ -74,6 +74,19 @@ Enter the command below in the terminal to run the tests with coverage using
   python -m pytest tests/
 ```
 ## .env Settings 
+```sh
+  export "APP_SETTINGS"="DEVELOPMENT"
+  export "DATABASE_NAME"=""
+  export "DATABASE_USER"=""
+  export "DATABASE_PASSWORD"=""
+  export "DATABASE_HOST"=""
+  export "DATABASE_PORT"=""
+```
+  run your .env file on terminal
+  ```sh 
+    source .env
+  ```
+   
 
 ## Endpoint Examples
 Post a redflag incident : api/v2/incidents
