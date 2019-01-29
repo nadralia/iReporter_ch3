@@ -14,11 +14,6 @@ class DatabaseConnection:
                     database=os.environ["DATABASE_NAME"], user=os.environ["DATABASE_USER"], 
                     password=os.environ["DATABASE_PASSWORD"], host=os.environ["DATABASE_HOST"], 
                     port=os.environ["DATABASE_PORT"])
-            else:
-                self.con = psycopg2.connect(
-                    database=os.environ["DATABASE_NAME"], user=os.environ["DATABASE_USER"], 
-                    password=os.environ["DATABASE_PASSWORD"], host=os.environ["DATABASE_HOST"], 
-                    port=os.environ["DATABASE_PORT"])
             self.con.autocommit = True
             self.dict_cursor = self.con.cursor(cursor_factory=extra.RealDictCursor)
         except Exception as ex:
@@ -47,8 +42,8 @@ class DatabaseConnection:
 			CREATE TABLE IF NOT EXISTS incidents (
                     incident_id SERIAL PRIMARY KEY NOT NULL,
                     createdBy INTEGER REFERENCES users(user_id),
-                    incident_type VARCHAR(12) NOT NULL,
-                    status VARCHAR(13) DEFAULT 'drafted', 
+                    incident_type VARCHAR(15) NOT NULL,
+                    status VARCHAR(50) DEFAULT 'drafted', 
                     latitude VARCHAR(25) NOT NULL,
                     longitude VARCHAR(25) NOT NULL,
                     images VARCHAR(100),

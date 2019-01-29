@@ -1,10 +1,29 @@
 import re
-from api.helpers.utils import (check_if_input_is_number,
-                                check_if_input_contains_space,
-                                check_if_input_contains_space)
 
 class Validation:
-   
+    
+    def check_if_input_is_number(self, input_value):
+        """function to checks if input value is a number"""
+        if isinstance(input_value, int) or isinstance(input_value, float):
+            return True
+        return False
+
+    def check_if_input_value_is_string(self, input_value):
+        """function to checks if input value  is a string"""
+        if (
+            isinstance(input_value, str)
+            and not str(input_value).isspace()
+            and not input_value.isnumeric()
+        ):
+            return True
+        return False
+
+    def check_if_input_contains_space(self, input_value):
+        """function to checks if input value contains space"""
+        if " " in input_value or len(str(input_value).split(" ")) > 1:
+            return True
+        return False
+
     def validate_name(self, name):
         """
         validates the name input
@@ -65,7 +84,7 @@ class Validation:
     
     def validate_location(self, latitude, longitude):
         """ validate latitude and longitude """
-        if not check_if_input_is_number(latitude) or not check_if_input_is_number(longitude):
+        if not self.check_if_input_is_number(latitude) or not self.check_if_input_is_number(longitude):
             return "location coordinates must be a number"
     
     def validate_status(self, status):
@@ -85,3 +104,4 @@ class Validation:
             _input = int(input)
         except ValueError:
             return "Input should be an interger"
+

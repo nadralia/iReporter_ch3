@@ -4,11 +4,41 @@ from api import app
 
 
 class TestValidation(unittest.TestCase):
-    """ Tests Reflag and user validations """
+    """ Tests incident and user validations """
 
     def setUp(self):
         """Sets up the validation class """
         self.validation = Validation()
+    
+    def test_check_if_input_is_number(self):
+        data = 5
+        self.assertEqual(self.validation.check_if_input_is_number(data), 
+         True)
+        
+    def test_check_if_input_is_not_number(self):
+        data = "a"
+        self.assertEqual(self.validation.check_if_input_is_number(data), 
+         False)
+    
+    def test_check_if_input_value_is_string(self):
+        data = "a"
+        self.assertEqual(self.validation.check_if_input_value_is_string(data), 
+         True)
+    
+    def test_check_if_input_value_is_not_string(self):
+        data = 5
+        self.assertEqual(self.validation.check_if_input_value_is_string(data), 
+         False)
+    
+    def test_check_if_input_contains_space(self):
+        data = " "
+        self.assertEqual(self.validation.check_if_input_contains_space(data), 
+         True)
+    
+    def test_check_if_input_contains_no_space(self):
+        data = "adralia"
+        self.assertEqual(self.validation.check_if_input_contains_space(data), 
+         False)
 
     def test_validate_name(self):
         """Tests to ensure the correct data definition passes"""

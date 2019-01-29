@@ -1,11 +1,11 @@
 from api.models.incident import IncidentModel
-from api.database.db_functions import DBFunctions
+
 
 class IncidentController:
 
     def __init__(self):
         """initialize objects and variables """
-        self.dbfunctions = DBFunctions()
+        self.incident_m = IncidentModel()
     
     def create_a_new_incident(self,createdBy, incident_type, status,latitude,longitude,
         images,videos,comment,createdOn):
@@ -14,7 +14,7 @@ class IncidentController:
                    latitude=latitude, longitude=longitude, images=images,videos=videos,
                    comment=comment, createdOn=createdOn)
 
-        self.dbfunctions.add_new_incident(createdBy=new_incident.createdBy,
+        self.incident_m.add_new_incident(createdBy=new_incident.createdBy,
                          incident_type=new_incident.incident_type, 
                          status=new_incident.status,latitude=new_incident.latitude, 
                          longitude=new_incident.longitude, images=new_incident.images,
@@ -25,7 +25,7 @@ class IncidentController:
 
     def does_incident_exist(self, comment,user_id):
         """check if incident exists."""
-        incident_exists = self.dbfunctions.does_incident_exist(comment,user_id)
+        incident_exists = self.incident_m.does_incident_exist(comment,user_id)
         if incident_exists:
             return incident_exists
         return False
@@ -33,39 +33,39 @@ class IncidentController:
 
     def fetch_all_incidents(self):
         """fetch all available incidents"""
-        available_incidents = self.dbfunctions.get_all_incidents()
+        available_incidents = self.incident_m.get_all_incidents()
         return available_incidents 
 
 
     def fetch_all_incidents_by_user(self, user_id):
         """fetch all available incidents"""
-        available_incidents = self.dbfunctions.get_all_incidents_by_user(user_id)
+        available_incidents = self.incident_m.get_all_incidents_by_user(user_id)
         return available_incidents 
 
     def get_single_incident(self, incident_id):
         """fetch a single incidents"""
-        incident = self.dbfunctions.fetch_single_incident(incident_id=incident_id)
+        incident = self.incident_m.fetch_single_incident(incident_id=incident_id)
         if incident:
             return incident
         return False
 
     def get_single_incident_by_user(self, user_id ,incident_id):
         """fetch a single incident of a user """
-        incident = self.dbfunctions.fetch_single_incident_of_user(user_id, incident_id)
+        incident = self.incident_m.fetch_single_incident_of_user(user_id, incident_id)
         if incident:
             return incident
         return False
 
     def delete_incident(self, incident_id):
         """delete a incident"""
-        delete_item = self.dbfunctions.delete_incident(incident_id=incident_id)
+        delete_item = self.incident_m.delete_incident(incident_id=incident_id)
         if delete_item:
             return True
         return False
     
     def user_delete_incident(self, user_id, incident_id):
         """delete a incident"""
-        delete_item = self.dbfunctions.delete_incident_of_user(user_id, incident_id)
+        delete_item = self.incident_m.delete_incident_of_user(user_id, incident_id)
         if delete_item:
             return True
         return False
@@ -73,11 +73,10 @@ class IncidentController:
     def update_incident(self, incident_type, status,latitude,longitude,
         images,videos,comment,incident_id):
         """update a incident"""
-        update = self.dbfunctions.update_incident(
-                         incident_type=incident_type, 
-                         status=status,latitude=latitude, 
+        update = self.incident_m.update_incident(incident_type=incident_type, 
+                         status=status, latitude=latitude, 
                          longitude=longitude, images=images,
-                         videos=videos,comment=comment,incident_id=incident_id)
+                         videos=videos, comment=comment, incident_id=incident_id)
         if update:
             return True
         else:
@@ -86,50 +85,10 @@ class IncidentController:
     def update_incident_by_user(self,user_id, incident_type,latitude,longitude,
         images,videos,comment,incident_id):
         """update a incident"""
-        update = self.dbfunctions.update_incident_by_normal_user(createdBy=user_id,
+        update = self.incident_m.update_incident_by_normal_user(createdBy=user_id,
                          incident_type=incident_type, 
                          latitude=latitude,longitude=longitude, images=images,
                          videos=videos,comment=comment,incident_id=incident_id)
-        if update:
-            return True
-        else:
-            return False
-
-    def update_comment(self ,user_id,incident_id,comment):
-        """update comment"""
-        update = self.dbfunctions.update_comment(user_id,incident_id,comment)
-        if update:
-            return True
-        else:
-            return False
-    
-    def update_location(self ,user_id,incident_id,latitude,longitude):
-        """update location"""
-        update = self.dbfunctions.update_location(user_id,incident_id,latitude,longitude)
-        if update:
-            return True
-        else:
-            return False
-
-    def update_status(self ,incident_id,status):
-        """update status"""
-        update = self.dbfunctions.update_status(incident_id,status)
-        if update:
-            return True
-        else:
-            return False
-    
-    def update_comment_admin(self ,incident_id,comment):
-        """update comment"""
-        update = self.dbfunctions.update_comment_admin(incident_id,comment)
-        if update:
-            return True
-        else:
-            return False
-    
-    def update_location_admin(self ,incident_id,latitude,longitude):
-        """update location"""
-        update = self.dbfunctions.update_location_admin(incident_id,latitude,longitude)
         if update:
             return True
         else:

@@ -5,7 +5,6 @@ from flask.views import MethodView
 from datetime import datetime
 from api.helpers.validations import Validation
 from api.controllers.user import UserController
-from api.database.db_functions import DBFunctions
 
 validate = Validation()
 user_controller = UserController()
