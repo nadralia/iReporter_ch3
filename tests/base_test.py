@@ -47,3 +47,40 @@ class BaseTestCase(unittest.TestCase):
     def user_header(self):
        token = generate_token("nadralia", "False")
        return token
+    
+    def add_incident(self):
+        """
+        Function to create a incident
+        """
+        user_header= self.user_header()
+        incident_data = {
+            "incident_type": "red-flag",
+            "latitude": "6.5951139",
+            "longitude": "3.3429975",
+            "images": "extortion.jpg",
+            "videos": "extortion.mp4",
+            "comment": "Extortion at the FDC"
+        }
+        return self.app.post("/api/v2/incidents",
+                        content_type='application/json',
+                        headers=dict(Authorization='Bearer '+user_header),
+                        data=json.dumps(incident_data)   
+                    ) 
+    def add_incident_admin(self):
+        """
+        Function to create a incident
+        """
+        admin_header= self.admin_header()
+        incident = {
+            "incident_type": "intervention",
+            "latitude": "6.5951139",
+            "longitude": "3.3429975",
+            "images": "extort.jpg",
+            "videos": "extort.mp4",
+            "comment": "Extortion at the URA"
+        }
+        return self.app.post("/api/v2/incidents",
+                        content_type='application/json',
+                        headers=dict(Authorization='Bearer '+admin_header),
+                        data=json.dumps(incident)   
+                    ) 

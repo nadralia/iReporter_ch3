@@ -1,11 +1,11 @@
 from flask import request, jsonify
 import datetime
-from config import Config
+import os
 from functools import wraps
 import jwt
 
 
-secret_key = Config.SECRET_KEY
+secret_key = os.environ["SECRET_KEY"]
 
 def generate_token(username, isAdmin=False):
     """Generate a token  """

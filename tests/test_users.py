@@ -22,6 +22,9 @@ class TestUsers(BaseTestCase):
     def test_class_instance(self):
         """Tests that the defined object is an instance of the User class"""
         self.assertIsInstance(self.user, UserModel)
+    
+    def test_check_username(self):
+        pass
 
 
    

@@ -4,15 +4,12 @@ from datetime import datetime
 from api.helpers.validations import Validation
 from api.controllers.incident import IncidentController
 from api.controllers.user import UserController
-from api.database.db_functions import DBFunctions
 from api.helpers.token import (get_current_user_identity,
                                 get_current_user_role)
 
 validate = Validation()
 incident_controller = IncidentController()
 user_controller = UserController()
-
-db_func = DBFunctions()
 incident_blueprint = Blueprint("incident_blueprint", __name__)
 
 """Incident VIEWS"""
@@ -59,8 +56,6 @@ class AddIncident(MethodView):
         except Exception as exception:
             return jsonify({"message": str(exception)}), 400
        
-
-
 class FetchAllIncidents(MethodView):
     def get(self):
         is_admin = get_current_user_role()
@@ -77,8 +72,6 @@ class FetchAllIncidents(MethodView):
             if all_incidents:
                 return jsonify({"available_incidents": all_incidents}), 200
             return jsonify({"message": "no incidents added yet"}), 404
-
-
 
 class FetchSingleIncident(MethodView):
     def get(self, incident_id):
@@ -106,8 +99,6 @@ class FetchSingleIncident(MethodView):
                 return jsonify({"incident_details": incident_details}), 200
             return jsonify({"message": "incident not added yet"}), 404
 
-        
-
 class DeleteIncident(MethodView):
     def delete(self, incident_id):
         is_admin = get_current_user_role()
@@ -133,9 +124,6 @@ class DeleteIncident(MethodView):
                 return jsonify({"message": "incident successfully deleted"}), 200
             else:
                 return jsonify({"message": "incident not deleted, or doesn't exist"}), 400
-
-        
-
 
 class UpdateIncident(MethodView):
     def put(self, incident_id):
@@ -165,7 +153,7 @@ class UpdateIncident(MethodView):
                             "incident successfully updated.",
                             "incident": incident_controller.get_single_incident(incident_id=incident_id)
                     }), 200
-                return jsonify({"message": "incident not updated or doesn't exist"}), 400
+                return jsonify({"message": update}), 400
             return jsonify({"message": "Please use the corrects keys"}), 400
         else:
             invalid_id = validate.validate_input_type(incident_id)
@@ -197,92 +185,6 @@ class UpdateIncident(MethodView):
 
             return jsonify({"message": "Please use the corrects keys"}), 400
        
-class EditComment(MethodView):
-    def patch(self, incident_id):
-        is_admin = get_current_user_role()
-        if is_admin == "True":
-            data = request.get_json()
-            comment = data.get("comment") 
-            updated_comment = incident_controller.update_comment_admin(incident_id,comment)
-            if updated_comment:
-                    return jsonify({
-                        "message":
-                            "incident comment successfully updated.",
-                            "incident": incident_controller.get_single_incident(incident_id=incident_id)
-                    }), 200
-            return jsonify({"message": "incident not updated or doesn't exist"}), 400
-        
-        else:
-            data = request.get_json()
-            comment = data.get("comment") 
-            username =  get_current_user_identity()
-            user = user_controller.get_user(username=username)
-            user_id = user["user_id"] 
-            updated_comment = incident_controller.update_comment(user_id,incident_id,comment)
-            if updated_comment:
-                    return jsonify({
-                        "message":
-                            "incident comment successfully updated.",
-                            "incident": incident_controller.get_single_incident_by_user(user_id ,incident_id)
-                    }), 200
-            return jsonify({"message": updated_comment}), 400
-
-
-
-class EditLocation(MethodView):
-    def patch(self, incident_id):
-        is_admin = get_current_user_role()
-        if is_admin == "True":
-            data = request.get_json()
-            latitude = data.get("latitude") 
-            longitude = data.get("longitude") 
-            updated_location = incident_controller.update_location_admin(incident_id,latitude,longitude)
-            if updated_location:
-                    return jsonify({
-                        "message":
-                            "incident location successfully updated.",
-                            "incident": incident_controller.get_single_incident(incident_id=incident_id)
-                    }), 200
-            return jsonify({"message": "incident not updated or doesn't exist"}), 400
-        
-        else:
-            data = request.get_json()
-            latitude = data.get("latitude") 
-            longitude = data.get("longitude") 
-            username =  get_current_user_identity()
-            user = user_controller.get_user(username=username)
-            user_id = user["user_id"] 
-            updated_location = incident_controller.update_location(user_id,incident_id,latitude,longitude)
-            if updated_location:
-                    return jsonify({
-                        "message":
-                            "incident location successfully updated.",
-                            "incident": incident_controller.get_single_incident_by_user(user_id ,incident_id)
-                    }), 200
-            return jsonify({"message": "incident not updated or doesn't exist"}), 400
-
-
-
-class EditStatus(MethodView):
-    def patch(self, incident_id):
-        is_admin = get_current_user_role()
-        if is_admin == "True":
-            data = request.get_json()
-            status = data.get("status") 
-            updated_status = incident_controller.update_status(incident_id,status)
-            if updated_status:
-                    return jsonify({
-                        "message":
-                            "incident status successfully updated.",
-                            "incident": incident_controller.get_single_incident(incident_id=incident_id)
-                    }), 200
-            return jsonify({"message": "incident not updated or doesn't exist"}), 400
-        else:
-            return jsonify({"message": "Only Admin can edit a status of incident"}), 400
-
-
-
-
 add_incident_view = AddIncident.as_view("add_incident_view")
 fetch_all_incidents_view = FetchAllIncidents.as_view("fetch_all_incidents_view")
 fetch_single_incident_view = FetchSingleIncident.as_view("fetch_single_incident_view")
@@ -299,17 +201,3 @@ incident_blueprint.add_url_rule(
     "/api/v2/incidents/<incident_id>", view_func=delete_incident_view, methods=["DELETE"])
 incident_blueprint.add_url_rule(
     "/api/v2/incidents/<incident_id>", view_func=update_incident_view, methods=["PUT"])
-
-
-edit_comment_view = EditComment.as_view("edit_comment_view")
-incident_blueprint.add_url_rule(
-    "/api/v2/incidents/<incident_id>/comment", view_func=edit_comment_view, methods=["PATCH"])
-
-edit_location_view = EditLocation.as_view("edit_location_view")
-incident_blueprint.add_url_rule(
-    "/api/v2/incidents/<incident_id>/location", view_func=edit_location_view, methods=["PATCH"])
-
-
-edit_status_view = EditStatus.as_view("edit_status_view")
-incident_blueprint.add_url_rule(
-    "/api/v2/incidents/<incident_id>/status", view_func=edit_status_view, methods=["PATCH"])

@@ -4,7 +4,7 @@ from flask import jsonify, json
 
 class TestUserViews(BaseTestCase):
 
-    def test_register_and_login(self):
+    def test_register(self):
         """Tests that the user is registered and logs in as reporter"""
         
         user_data = {
@@ -24,6 +24,10 @@ class TestUserViews(BaseTestCase):
         msg = json.loads(response.data)
         self.assertIn("User account created", msg['message'])
         self.assertEqual(response.status_code, 201)
+
+    def test_user_not_registered(self):
+        """Tests that the user is registered and logs in as reporter"""
+        pass
 
     def test_registration_with_missing_keys(self):
         """ Test for missing keys """
@@ -130,39 +134,3 @@ class TestUserViews(BaseTestCase):
         reply = json.loads(response.data)
         self.assertEqual(reply.get("message"), "Minimum length of password: 6 and  Maximum length of password: 12")
         self.assertEqual(response.status_code, 400) 
-
-    def test_registration_with_existing_username(self):
-        """ Test for successful user register """
-        user_data = {
-            "firstname": "Admin",
-            "lastname": "ireporter",
-            "othernames": "",
-            "email": "adminireporter@gmail.com",
-            "username": "admin007",
-            "password": "nadra2526#A",
-            "phonenumber": "+256779004531",
-            "gender": "Male",
-            "is_admin":"False"
-        }
-        user_data1 = {
-            "firstname": "Adralia",
-            "lastname": "ireporter",
-            "othernames": "manalao",
-            "email": "adminnadr@gmail.com",
-            "username": "admin012307",
-            "password": "nadrfa2526#A",
-            "phonenumber": "+256779004531",
-            "gender": "Male",
-            "is_admin":"False"
-        }
-        response = self.app.post("api/v2/auth/signup",
-                                 content_type='application/json',
-                                 data=json.dumps(user_data)
-                                 )
-        response2 = self.app.post("api/v2/auth/signup",
-                                 content_type='application/json',
-                                 data=json.dumps(user_data1)
-                                 )                         
-        reply = json.loads(response2.data)
-        self.assertEqual(reply.get("message"), "Internal server error")
-        self.assertEqual(response2.status_code, 500)
