@@ -32,12 +32,12 @@ class RegisterUser(MethodView):
             invalid_password = validate.validate_password(password)
             invalid = validate.validate_user_details(username,email,gender)
             if invalid:
-                return jsonify({"message": invalid}), 400
+                return jsonify({"message": invalid, "status": 400}), 400
             if invalid_password != True :
-                return jsonify({"message": invalid_password}), 400
+                return jsonify({"message": invalid_password, "status": 400}), 400
             username_exists = user_controller.check_if_username_exists(username=username)
             if username_exists:
-                return jsonify({"message": "username exists"}), 409
+                return jsonify({"message": "username exists", "status": 409}), 409
             
             new_user = user_controller.create_new_user(firstname=firstname, lastname=lastname,
                     othernames=othernames,email=email,username=username, password=hashed_password, 
@@ -45,11 +45,25 @@ class RegisterUser(MethodView):
             
             if new_user:
                 user = user_controller.get_user(username=username)
-                return jsonify({"message": "User account created","user":user}), 201
+                response = (
+                            jsonify(
+                                {
+                                    "status": 201,
+                                    "data": [
+                                        {
+                                            "user": user,
+                                            "message": "User account created",
+                                        }
+                                    ],
+                                }
+                            ),
+                            201,
+                        )
+                return response
             else:
-                return jsonify({"message": "User not created"}), 400
+                return jsonify({"message": "User not created", "status": 400}), 400
 
-        return jsonify({"message": "Please provide the correct keys for the data"}), 400
+        return jsonify({"message": "Please provide the correct keys for the data", "status": 400}), 400
 
             
        
@@ -66,7 +80,7 @@ class Login(MethodView):
             password = data.get("password")
             invalid = validate.validate_login(username, password)
             if invalid:
-                return jsonify({"message": invalid}), 400
+                return jsonify({"message": invalid, "status": 400}), 400
 
             user = user_controller.check_if_username_exists(username=username)
             if user:
@@ -88,9 +102,9 @@ class Login(MethodView):
                                 200,
                             )
                     return response
-                return jsonify({"message": "Wrong password"}), 400
-            return jsonify({"message": "wrong login credentials or user does not exist"}), 400
-        return jsonify({"message": "Please provide the correct keys for the data"}), 400
+                return jsonify({"message": "Wrong password", "status": 400}), 400
+            return jsonify({"message": "wrong login credentials or user does not exist", "status": 400}), 400
+        return jsonify({"message": "Please provide the correct keys for the data", "status": 400}), 400
         
 
 login_view = Login.as_view("login_view")

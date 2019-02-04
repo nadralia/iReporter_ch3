@@ -21,8 +21,8 @@ class TestUserViews(BaseTestCase):
         response = self.app.post('api/v2/auth/signup',
                                     content_type='application/json',
                                     data=json.dumps(user_data))
-        msg = json.loads(response.data)
-        self.assertIn("User account created", msg['message'])
+        msg = json.loads(response.data.decode())
+        self.assertIn("User account created",msg["data"][0]["message"])
         self.assertEqual(response.status_code, 201)
 
     def test_user_not_registered(self):
