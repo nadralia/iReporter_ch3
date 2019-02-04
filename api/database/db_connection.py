@@ -16,6 +16,7 @@ class DatabaseConnection:
                     port=os.environ["DATABASE_PORT"])
             self.con.autocommit = True
             self.dict_cursor = self.con.cursor(cursor_factory=extra.RealDictCursor)
+            self.create_tables()
         except Exception as ex:
             pprint("Database connection error: "+str(ex))
 
