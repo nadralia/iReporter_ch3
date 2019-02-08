@@ -33,7 +33,7 @@ class DatabaseConnection:
                     password VARCHAR(255) NOT NULL,
                     phonenumber VARCHAR(14) UNIQUE NOT NULL,
                     gender VARCHAR(14) NOT NULL,
-                    is_admin VARCHAR (5) DEFAULT 'false',
+                    is_admin VARCHAR(14) DEFAULT 'False',
                     registered TIMESTAMP WITH TIME ZONE DEFAULT now(),
                     updatedOn TIMESTAMP WITH TIME ZONE DEFAULT now()
              )
