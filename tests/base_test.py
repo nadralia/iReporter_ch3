@@ -2,11 +2,13 @@ import unittest
 from run import app
 from flask import json
 from api.database.db_connection import DatabaseConnection
+from api.models.user import UserModel
 from api.controllers.user import UserController
 from api.helpers.token import generate_token
 
 db_conn = DatabaseConnection()
 user_controller = UserController()
+user_m = UserModel()
 
 class BaseTestCase(unittest.TestCase):
     def setUp(self):
@@ -30,22 +32,21 @@ class BaseTestCase(unittest.TestCase):
         db_conn.delete_tables()
 
     def register_admin(self):
-        user_controller.create_new_user(self.firstname,self.lastname,
+        user_m.add_new_admin(self.firstname,self.lastname,
         self.othernames,self.email,self.username, self.password, 
         self.phonenumber,self.gender,self.is_admin)
         
     def register_reporter(self):
-        user_controller.create_new_user("adralia","nelson","mandela","nadralia@gmail.com", 
-                         "nadralia","nadra29#liA","0703-000001",
-                                  "Male", "False")
+        user_controller.create_new_user("adralia","nelson","mandela","nelsonadralia@gmail.com", 
+                         "nadralia7","nadra29#liAM","0703-000001",
+                                  "Male")
 
     def admin_header(self):
        token = generate_token(self.username, self.is_admin)
        return token
 
-
     def user_header(self):
-       token = generate_token("nadralia", "False")
+       token = generate_token("nadralia7", "False")
        return token
     
     def add_incident(self):
@@ -66,6 +67,7 @@ class BaseTestCase(unittest.TestCase):
                         headers=dict(Authorization='Bearer '+user_header),
                         data=json.dumps(incident_data)   
                     ) 
+
     def add_incident_admin(self):
         """
         Function to create a incident

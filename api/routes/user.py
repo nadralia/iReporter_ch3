@@ -1,6 +1,7 @@
 from flask import jsonify, request, Blueprint,make_response
 from werkzeug.security import generate_password_hash, check_password_hash
-from api.helpers.token import generate_token
+from api.helpers.token import (generate_token,get_current_user_role, 
+                                   get_current_user_identity)
 from flask.views import MethodView
 from datetime import datetime
 from api.helpers.validations import Validation
@@ -15,7 +16,7 @@ class RegisterUser(MethodView):
     def post(self):
         data = request.get_json()
         search_keys = ("firstname", "lastname", "othernames" ,"email", "username", 
-        "password", "phonenumber","gender","is_admin")
+        "password", "phonenumber","gender")
         if all(key in data.keys() for key in search_keys):
             firstname = data.get("firstname")
             lastname = data.get("lastname")
@@ -25,7 +26,6 @@ class RegisterUser(MethodView):
             password = data.get("password")
             phonenumber = data.get("phonenumber")
             gender = data.get("gender")
-            is_admin = data.get("is_admin")
             hashed_password = generate_password_hash(password, method='sha256')
 
             #validate user details 
@@ -41,7 +41,7 @@ class RegisterUser(MethodView):
             
             new_user = user_controller.create_new_user(firstname=firstname, lastname=lastname,
                     othernames=othernames,email=email,username=username, password=hashed_password, 
-                    phonenumber=phonenumber,gender=gender,is_admin=is_admin) 
+                    phonenumber=phonenumber, gender=gender) 
             
             if new_user:
                 user = user_controller.get_user(username=username)
@@ -109,3 +109,23 @@ class Login(MethodView):
 
 login_view = Login.as_view("login_view")
 user_blueprint.add_url_rule("/api/v2/auth/login",view_func=login_view, methods=["POST"])
+
+class Profile(MethodView):
+    def get(self):
+        username =  get_current_user_identity()
+        user = user_controller.check_if_username_exists(username=username)
+        if user:
+            response = (
+                        jsonify(
+                            {
+                                "status": 200,
+                                "profile_details": user,
+                            }
+                        ),
+                        200,
+                    )
+            return response
+        return jsonify({"message": "wrong login credentials or user does not exist", "status": 400}), 400
+
+profile_view = Profile.as_view("profile_view")
+user_blueprint.add_url_rule("/api/v2/auth/profile",view_func=profile_view, methods=["GET"])
