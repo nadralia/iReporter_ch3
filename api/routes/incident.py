@@ -1,6 +1,9 @@
 from flask import jsonify, request, Blueprint
+import os
+import uuid
 from flask.views import MethodView
 from datetime import datetime
+from flasgger.utils import swag_from
 from api.helpers.validations import Validation
 from api.controllers.incident import IncidentController
 from api.controllers.user import UserController
@@ -27,7 +30,7 @@ class AddIncident(MethodView):
                 longitude = data.get("longitude")
                 status = "drafted"
                 createdOn = datetime.now()
-            
+                incidentUnx = uuid.uuid4()
                 invalid = validate.validate_incident(
                     incident_type,comment)
                 if invalid:
@@ -41,20 +44,35 @@ class AddIncident(MethodView):
                 if username:
                     user = user_controller.get_user(username=username)
                     user_id = user["user_id"]
-                    add_incident = incident_controller.create_a_new_incident(createdBy=user_id, 
+                    add_incident = incident_controller.create_a_new_incident(incident_unique=incidentUnx,createdBy=user_id, 
                                 incident_type=incident_type, status=status,latitude=latitude,
                                 longitude=longitude,images=images, videos=videos, 
                                 comment=comment ,createdOn=createdOn)
                     if add_incident:
                         return jsonify({
                             "message": "incident successfully added",
-                            "incident":incident_controller.does_incident_exist(comment,user_id)
+                            "incident":incident_controller.does_incident_exist(incidentUnx,user_id)
                             }), 201
                 return jsonify({"message": "user identity unknown"}), 400
 
             return jsonify({"message": "Please use the corrects keys"}), 400
         except Exception as exception:
             return jsonify({"message": str(exception)}), 400
+
+class UploadFiles(MethodView):
+    def post(self):
+        if request.method == 'POST':
+            APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+            target = os.path.join(APP_ROOT, 'uploads/')
+            if not os.path.isdir(target):
+                os.mkdir(target)
+
+            for file in request.files.getlist("file"):
+                filename = file.filename
+                destination = "/".join([target, filename])
+                file.save(destination)
+            return jsonify({"message": "file uploaded successfully"}), 200
+
        
 class FetchAllIncidents(MethodView):
     def get(self):
@@ -186,6 +204,7 @@ class UpdateIncident(MethodView):
             return jsonify({"message": "Please use the corrects keys"}), 400
        
 add_incident_view = AddIncident.as_view("add_incident_view")
+upload_file_view = UploadFiles.as_view("upload_file_view")
 fetch_all_incidents_view = FetchAllIncidents.as_view("fetch_all_incidents_view")
 fetch_single_incident_view = FetchSingleIncident.as_view("fetch_single_incident_view")
 delete_incident_view = DeleteIncident.as_view("delete_incident_view")
@@ -193,6 +212,8 @@ update_incident_view = UpdateIncident.as_view("update_incident_view")
 
 incident_blueprint.add_url_rule(
     "/api/v2/incidents", view_func=add_incident_view, methods=["POST"])
+incident_blueprint.add_url_rule(
+    "/api/v2/uploads", view_func=upload_file_view, methods=["POST"])
 incident_blueprint.add_url_rule(
     "/api/v2/incidents", view_func=fetch_all_incidents_view, methods=["GET"])
 incident_blueprint.add_url_rule("/api/v2/incidents/<incident_id>",

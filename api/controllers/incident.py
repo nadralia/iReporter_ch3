@@ -7,14 +7,16 @@ class IncidentController:
         """initialize objects and variables """
         self.incident_m = IncidentModel()
     
-    def create_a_new_incident(self,createdBy, incident_type, status,latitude,longitude,
+    def create_a_new_incident(self,incident_unique,createdBy, incident_type, status,latitude,longitude,
         images,videos,comment,createdOn):
         """create a new incident entry"""
-        new_incident = IncidentModel(createdBy=createdBy,incident_type=incident_type, status=status,
+        new_incident = IncidentModel(incident_unique=incident_unique,createdBy=createdBy,
+                   incident_type=incident_type, status=status,
                    latitude=latitude, longitude=longitude, images=images,videos=videos,
                    comment=comment, createdOn=createdOn)
 
-        self.incident_m.add_new_incident(createdBy=new_incident.createdBy,
+        self.incident_m.add_new_incident(incident_unique=new_incident.incident_unique,
+                        createdBy=new_incident.createdBy,
                          incident_type=new_incident.incident_type, 
                          status=new_incident.status,latitude=new_incident.latitude, 
                          longitude=new_incident.longitude, images=new_incident.images,
@@ -23,9 +25,10 @@ class IncidentController:
 
         return True
 
-    def does_incident_exist(self, comment,user_id):
+
+    def does_incident_exist(self, incidentUnx,user_id):
         """check if incident exists."""
-        incident_exists = self.incident_m.does_incident_exist(comment,user_id)
+        incident_exists = self.incident_m.does_incident_exist(incidentUnx,user_id)
         if incident_exists:
             return incident_exists
         return False

@@ -3,6 +3,7 @@ from api.database.db_connection import DatabaseConnection
 class IncidentModel:
     def __init__(self, **kwargs):
         """ stores incident details """
+        self.incident_unique = kwargs.get('incident_unique')
         self.createdBy = kwargs.get('createdBy')
         self.incident_type = kwargs.get('incident_type')
         self.status = kwargs.get('status')
@@ -16,21 +17,21 @@ class IncidentModel:
         self.cursor = self.connect.dict_cursor
     
 
-    def add_new_incident(self,createdBy, incident_type, status,latitude,longitude,
+    def add_new_incident(self,incident_unique,createdBy, incident_type, status,latitude,longitude,
         images,videos,comment,createdOn):
         """add new incident """
         query = (
-            """INSERT INTO incidents (createdBy, incident_type, status, latitude, longitude, 
+            """INSERT INTO incidents (incident_unique,createdBy, incident_type, status, latitude, longitude, 
             images,videos,comment,createdOn) 
-            VALUES ('{}', '{}', '{}', '{}','{}', '{}', '{}', '{}','{}'
-            )""".format(createdBy,incident_type,status,latitude, longitude,images,
+            VALUES ('{}', '{}', '{}', '{}','{}', '{}', '{}', '{}','{}','{}'
+            )""".format(incident_unique,createdBy,incident_type,status,latitude, longitude,images,
             videos,comment,createdOn))
 
         self.cursor.execute(query)
     
-    def does_incident_exist(self,comment,user_id):
+    def does_incident_exist(self,incident_unique,user_id):
         """# check if comment exists."""
-        query = ("""SELECT * FROM incidents where comment = '{}' and createdBy = '{}'""".format(comment,user_id))
+        query = ("""SELECT * FROM incidents where incident_unique = '{}' and createdBy = '{}'""".format(incident_unique,user_id))
         self.cursor.execute(query)
         incident = self.cursor.fetchone()
         if incident:
