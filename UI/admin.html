@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>iReporter || Add Reports</title>
+	<link rel="stylesheet" type="text/css" href="static/css/main.css">
+	<link rel="stylesheet" type="text/css" href="static/css/admin.css">
+</head>
+<body>
+  <!-- Begin header Section -->
+	<header>
+		<div class="container">
+			<div class="logo">
+				<h1 class="logo-name">i<span class="green-color">Reporter</span></h1>
+			</div>
+			<div class="nav">
+                <a class="login-link" href="create-report.html">Create Report</a>
+                <a class="signup-link"href="view-reports.html">View Reports</a>
+                <a class="signup-link" href="profile.html">Profile</a>
+                <a class="signup-link" href="index.html">Log out</a>
+			</div>
+		</div>
+  </header>
+  <!-- End header Section -->
+  <!-- Begin admin control Section -->
+    <section class="report-table">
+      <h2 class="section-title">Admin Dashboard</h2>
+      <div class="admin-report">
+        <div class="report-stat">
+          <p>1670</p>
+          <span>Total records</span>
+        </div>
+        <div class="report-stat">
+          <p>560</p>
+          <span>Drafted</span>
+        </div>
+        <div class="report-stat">
+          <p>300</p>
+          <span>Under Investigation</span>
+        </div>
+        <div class="report-stat">
+          <p>308</p>
+          <span>Resolved</span>
+        </div>
+        <div class="report-stat">
+          <p>150</p>
+          <span>Rejected</span>
+        </div>
+      </div>
+	  <section class="section-admin">
+        <div class="section-admin-wrapper-div">
+            <div class="flex-box-main">
+                <!-- <div class="row-1-of-3">row-1-of-3</div> -->
+                <div class="row-1-of-3" id="div-table-title">
+                    <h2 class="heading-secondary-dark" id="table-title">
+                        Manage Reports
+                    </h2>
+                </div>
+                <div class="row-1-of-3" id="table-wrapper">
+                    <table class="table-admin" id="table-admin">
+                        <tr class="row">
+                            <td class="cell">ID</td>
+                            <td class="cell">Type</td>
+                            <td class="cell">Comment</td>
+                            <td class="cell">image</td>
+                            <td class="cell">video</td>
+                            <td class="cell">Location</td>
+                            <td class="cell">Created on</td>
+                            <td class="cell">Created by</td>
+                            <td class="cell">Status</td>
+                        </tr>
+                         <tr class="row">
+                            <td class="cell id">01</td>
+                            <td class="cell type">red-flag</td>
+                            <td class="cell comment">Embezzlement</td>
+                            <td class="cell images">Embezzlement.jpg</td>
+                            <td class="cell videos">Embezzlement.mp4</td>
+                            <td class="cell location">3.2342, 17.8392</td>
+                            <td class="cell createdon">02 - 11 - 2018</td>
+                            <td class="cell createdby">nadralia</td>
+                            <td class="cell status">
+                                <select name="status" id="status">
+                                    <option value="draft">draft</option>
+                                    <option value="under investigation">U.I</option>
+                                    <option value="resolved">resolved</option>
+                                    <option value="rejected">rejected</option>
+                                </select>
+                            </td>
+                        </tr> 
+                       
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+      
+    </section>
+  <!-- End admin control Section -->
+
+<!-- Begin footer Section -->
+<footer class="mb-1">
+    <div>
+        <h3 class="copyright">iReporter &copy; 2018 </h3>
+    </div>
+ </footer>
+ <!-- End footer Section -->
+</body>
+</html>

@@ -1,0 +1,131 @@
+/*********************** INCIDENT PAGE *****************/
+.google-map {
+    width: 100%;
+    height:20rem;
+    border: 2px solid #35424a;
+    margin-left: 0;
+    padding: 0;
+}
+
+.map-field {
+    margin: 1rem auto;
+    width: 70%;
+}
+.container-flex {
+    display: flex;
+    flex-direction: column;
+    padding: 2px;
+    width: 95%;
+    margin: 0 auto;
+}
+.form-wrapper {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.incident-form {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: rgba(250, 250, 210, .5);
+    margin: 2px;
+    padding: 2px;
+}
+
+
+#input-flex-for-btn {
+    background-color: transparent;
+    justify-content: center;
+}
+.incident-field {
+    padding: 2px;
+    width: 48%;
+}
+
+.upload-label{
+	color: #000000;
+}
+.incident-field-for-upload {
+    background-color: #eeeeee;
+}
+.input-flex {
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+} 
+
+.incident-form-input {
+   font: inherit;
+   width: 100%;
+   padding: .5rem .5rem .5rem .5rem;
+   outline: none;
+   color: black;
+   border: 2px solid #0facf3;
+   background-color: transparent;
+}
+
+
+textarea {
+    font: inherit;
+    width: 100%;
+    background-color: transparent;
+    outline: none;
+    padding: 1rem;
+}
+#incident-field-textarea {
+    width: 100%;
+}
+
+#btn-get-current-location {
+    border: none;
+    background: none;
+    outline: none;
+    font-size: 1rem;
+    color: #e8491d;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.div-over-file-upload-group {
+    text-align: center;
+}
+.file-upload-group {
+   padding-top: 10px;
+   padding-bottom: 10px;
+    
+}
+.incident-input-file-upload {
+    box-sizing: border-box;
+    padding-right: 0;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+	
+.div-incident-form-btn {
+    width: 48%;
+}
+#create-incident-btn {
+	font-size: 1rem;
+	background-color: #0facf3;
+    width: 100%;
+}
+
+select  {
+    outline: 0;
+    overflow: hidden;
+    height: 40px;
+	width: 200px;
+    background: #2c343c;
+    color: #ffffff;
+    border: #2c343c;
+    padding: 5px 3px 5px 10px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 10px;
+}
+
+select option {border: 1px solid #000; background: #010;}
+/********************** (END INCIDENT PAGE) *************/

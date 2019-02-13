@@ -1,0 +1,177 @@
+/******************** PROFILE PAGE *******************/
+.tab-content {
+  border: 1px solid #C5D0DC;
+  padding: 16px 12px;
+  position: relative
+}
+
+.profile-picture {
+  border: 1px solid #CCC;
+  background-color: #FFF;
+  padding: 4px;
+  display: inline-block;
+  max-width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, .15)
+}
+
+.profile-user-info {
+  display: table;
+  width: 98%;
+  width: calc(100% - 24px);
+  margin: 0 auto
+}
+
+.profile-info-row {
+  display: table-row
+}
+
+.profile-info-name {
+  display: table-cell;
+  border-top: 1px dotted rgb(183, 194, 204);
+  padding: 6px 10px 6px 4px;
+  font-weight: 400;
+  color: #667E99;
+  background-color: transparent;
+  width: 110px;
+  vertical-align: middle
+}
+
+.profile-info-value {
+  padding: 6px 4px 6px 6px
+}
+
+.profile-info-value>span::before {
+  display: none
+}
+
+.profile-table {
+  z-index: 100;
+  flex-basis: 73%;
+}
+.profile-image{
+  height: 150px;
+  width: 150px;
+}
+
+#date {
+    /* border: 1px solid black; */
+    text-align: center;
+    font-weight: 300;
+}
+.profile {
+    background-color: #eeeeee;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+.profile-content {
+    color: black;
+    width: 80%;
+    min-height: 20rem;
+    margin: 0 auto;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+    border-radius: 3px;
+}
+
+.incident-data-info {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.incident-data-info-title {
+    text-align: center;
+    text-transform: uppercase;
+    padding: .5rem 0 .5rem 0;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.piture-div-img {
+    /* border: 1px solid black; */
+    width: 12rem;
+    height: 12rem;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.piture-div-img > img {
+    width: 80%;
+    height: 100%;
+}
+.incident-data-info-userdetails {
+    text-align: center;
+}
+
+.incident-data-info-userdetails > p {
+    font-size: 2rem;
+    font-weight: lighter;
+}
+.flex-box {
+    display: flex;
+    justify-content: space-between;
+}
+.flex-child {
+    /* border: 1px solid black; */
+    width: 50%;
+}
+.redflag, .intervention{
+    text-align: center;
+    width: 48%;
+    border-radius: 5px;
+}
+.redflag{
+	background-color:red;
+	margin-left: 20px;
+}
+.intervention{
+	background-color:orange;
+}
+
+ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+.stats {
+    color: rgba(0, 0, 0, .8);
+    text-align: center;
+	margin-left:80px;
+	margin-top: 20px;
+}
+.redflag-stats {
+    /* border-right: 1px solid rgba(0, 0,0, .5); */
+}
+.incidence-stats {
+    border-left: 1px solid rgba(0, 0,0, .5);
+}
+#pic-for-username {
+    height: 5rem;
+    width: 5rem;
+    border-radius: 50%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+#pic-for-username > img {
+    height: 100%;
+    width: 100%;
+}
+#profile-username {
+    width: 80%;
+    line-height: 80px; /* will center the text vertically */
+}
+#flex-box-username-part {
+    /* border: 1px solid rgba(0, 0, 0, .5); */
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, .2);
+    box-shadow: 2px 2px 2px 2px black;
+    padding: 5px 0 5px 0;
+}
+
+/******************** (END PROFILE PAGE) *******************/
+

@@ -1,0 +1,128 @@
+/*********************** ADMIN PAGE *******************/
+.admin-report {
+  display: flex;
+  justify-content: space-between;
+  background: #fffffa;
+  padding: 25px;
+  margin-top: 20px;
+  border-left: 3px solid #0facf3;
+}
+
+.report-stat {
+  text-align: center;
+}
+
+.report-stat > p {
+  font-size: 3em;
+}
+
+.report-stat > span {
+  font-weight: 600;
+}
+
+.section-admin {
+    padding: 5px;
+    background-color:#eeeeee;
+ }
+.section-admin-wrapper-div {
+    padding: 5px;
+  }
+.section-admin .flex-box-main {
+    overflow-x: auto;
+    padding: 5px;
+    display: grid;
+    grid-row-gap: 1rem;
+    margin-top: 2rem;
+    grid-template-rows: 50px auto;}
+
+.outerErrorDisplayBox {
+    height: 200px;
+    position: relative;
+    display: none;
+}
+.innerErrorDisplayBox {
+    width: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.innerErrorDisplayBox h3 {
+    text-align: center;
+}
+.section-admin .flex-box-main .row-1-of-3 {
+    padding: 5px;
+    width: 100%;
+    margin: 0 auto;
+ }
+#table-wrapper {
+    border: none;}
+.table-admin {
+    width: 90%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
+}
+.table-admin .row {
+    height: 30px;
+    }
+.table-admin .row:first-child {
+    background-color: #35424a;
+    color: white;
+    font-weight: 700;}
+.table-admin tr:nth-child(odd) {
+    background-color: rgba(128, 128, 128, .2);
+}
+.table-admin .row .cell {
+    padding: 0 0.5rem 0 .5rem;
+    border: 1px solid silver;}
+.comment-and-media-link {
+    text-decoration: none;
+    color: black;
+    display: block;
+    font-style: italic;
+    margin: 0 auto;
+    cursor: pointer;
+}
+.address {
+    cursor: pointer;
+}
+select {
+    padding: 2px;
+    margin: 5px 0 5px 0;
+    width: 100%;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
+    font-size: 1rem;
+}
+.btn-delete-record {
+    font-size: 2rem;
+    color: #e8491d;
+    text-decoration: none;
+    display: block !important;
+    width: 100%;
+    text-align: center;
+    line-height: 1;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;}
+#div-table-title {
+    text-align: center;
+}
+#draft {
+    background-color: transparent;
+}
+#under-investigation {
+    background-color: yellow;
+}
+#resolved {
+    background-color: lightgreen;
+}
+#rejected {
+    background-color: salmon;
+}
+/******************** (END ADMIN PAGE) *******************/
