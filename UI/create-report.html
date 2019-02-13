@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>iReporter || Create Report</title>
+	<link rel="stylesheet" type="text/css" href="static/css/main.css">
+	<link rel="stylesheet" type="text/css" href="static/css/report.css">
+</head>
+<body>
+  <!-- Begin header Section -->
+	<header>
+		<div class="container">
+			<div class="logo">
+				<h1 class="logo-name">i<span class="green-color">iReporter</span></h1>
+			</div>
+			<div class="nav">
+                <a class="login-link" href="create-report.html">Create Report</a>
+                <a class="signup-link"href="view-reports.html">My Reports</a>
+                <a class="signup-link" href="profile.html">Profile</a>
+                <a class="signup-link" href="index.html">Log out</a>
+			</div>
+		</div>
+  </header>
+  <!-- End header Section -->
+  <!-- Begin create incident Section -->
+     <section class="incident">
+        <div class="container-flex">
+            <div class="map-field">
+			     <h2 class="title-heading" id="form-incident-title">
+                    Create a Report
+                </h2>
+                <div class="google-map" id="google-map">Map Area</div>
+            </div>
+            <div class="form-wrapper">
+			    
+                <form action="#" class="incident-form" id="incident-form">
+                   
+                    <div class="lat-long-field input-flex"> 
+                        <div class="incident-field">
+                            <input type="text" class="incident-form-input" id="latitude" placeholder="Latitude" required>
+                        </div>
+                        <div class="incident-field">
+                            <input type="text" class="incident-form-input" id="longitude" placeholder="Longitude" required>
+                        </div>
+                    </div>
+                    <div class="image-video-field input-flex">
+                        <div class="incident-field incident-field-for-upload">
+                            <div class="upload-group">
+                                <label for="pic" class="upload-label">Images</label>
+                                <input type="file" class="incident-input-file-upload" id="images" name="images" accept="image/*" multiple>
+                            </div>
+                        </div>
+                        <div class="incident-field incident-field-for-upload">
+                            <div class="upload-group">
+                                <label for="video" class="upload-label">Videos</label>
+                                <input type="file" class="incident-input-file-upload" id="videos" name="videos" accept="video/*" multiple>
+                            </div>
+                        </div>
+                    </div>
+					
+                    <div class="input-flex" id="form-group-last-child">
+                        <div class="incident-field" id="incident-field-textarea">
+                            <textarea name="comment" id="comment" rows="6" placeholder="Tell us more about this incident"></textarea>
+                        </div>
+                    </div>
+
+					<div id="radio-container" class= "input-flex">
+						<label for="incident_type">Incident Type</label>
+						<select id="incident_type">
+							<option>Select Incident Type</option>
+							<option value="intervention">Intervention</option>
+							<option value="red-flag">Red-flag</option>
+						</select>
+                    </div>
+                    <div class="input-flex" id="input-flex-for-btn">
+                        <div class="div-incident-form-btn">
+                            <button class="btn" id="create-incident-btn">Create Report</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+  <!-- End create incident Section -->
+
+<!-- Begin footer Section -->
+<footer class="mb-1">
+    <div>
+        <h3 class="copyright">iReporter &copy; 2018 </h3>
+    </div>
+ </footer>
+ <!-- End footer Section -->
+</body>
+</html>

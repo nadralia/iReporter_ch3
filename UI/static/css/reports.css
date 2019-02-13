@@ -1,0 +1,82 @@
+/*********************** REPORTS PAGE *******************/
+.report-history-section {
+    padding: 5px;
+    background-color: #eeeeee;
+}
+.report-history-section-content {
+    padding: 5px;
+}
+.report-history-section .flex-box-main {
+    overflow-x: auto;
+    padding: 5px;
+    display: grid;
+    grid-table-row-gap: 1rem;
+    margin-top: 2rem;
+    grid-template-table-rows: 50px auto;}
+
+.outerErrorDisplayBox {
+    height: 200px;
+    position: relative;
+    display: none;
+}
+.innerErrorDisplayBox {
+    width: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.innerErrorDisplayBox h3 {
+    text-align: center;
+}
+.report-history-section .flex-box-main .table-table-row-div {
+    padding: 5px;
+    width: 100%;
+    margin: 0 auto;
+}
+#table-content {
+    border: none;}
+.report-history-table {
+    width: 90%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
+}
+.report-history-table .table-row {
+    height: 30px;
+ }
+.report-history-table .table-row:first-child {
+    background-color: #35424a;
+    color: white;
+    font-weight: 700;}
+.report-history-table tr:nth-child(odd) {
+    background-color: rgba(128, 128, 128, .2);
+}
+.report-history-table .table-row .table-cell {
+    padding: 0 0.5rem 0 .5rem;
+    border: 1px solid silver;}
+.comment-and-media-link {
+    text-decoration: none;
+    color: black;
+    display: block;
+    font-style: italic;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.btn-delete-record {
+    font-size: 2rem;
+    color: #e8491d;
+    text-decoration: none;
+    display: block !important;
+    width: 100%;
+    text-align: center;
+    line-height: 1;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;}
+#div-table-title {
+    text-align: center;
+}
+/******************** (END REPORTS PAGE) *******************/

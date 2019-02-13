@@ -123,3 +123,79 @@ class IncidentModel:
                 return False   
         except:
             return False
+
+    def update_comment(self, user_id,incident_id,comment):
+        """ update comment of an incident"""
+        try:
+            query = ("""UPDATE incidents SET comment = '{}', 
+              where incident_id = '{}' and createdBy = '{}'
+              """ .format(comment,incident_id,user_id))
+            self.cursor.execute(query)
+            count = self.cursor.rowcount
+            if int(count) > 0:
+                return True
+            else:
+                return False   
+        except:
+            return False
+
+    def update_location(self, user_id,incident_id,latitude,longitude):
+        """ update location of an incident"""
+        try:
+            query = ("""UPDATE incidents SET 
+             latitude = '{}', longitude = '{}', 
+              where incident_id = '{}' and createdBy = '{}'
+              """ .format(latitude,longitude,incident_id,user_id))
+            self.cursor.execute(query)
+            count = self.cursor.rowcount
+            if int(count) > 0:
+                return True
+            else:
+                return False   
+        except:
+            return False
+    
+    def update_status(self, incident_id,status):
+        """ update status of an incident"""
+        try:
+            query = ("""UPDATE incidents SET status = '{}', 
+              where incident_id = '{}'
+              """ .format(status,incident_id))
+            self.cursor.execute(query)
+            count = self.cursor.rowcount
+            if int(count) > 0:
+                return True
+            else:
+                return False   
+        except:
+            return False
+    def update_comment_admin(self,incident_id,comment):
+        """ update comment of an incident"""
+        try:
+            query = ("""UPDATE incidents SET comment = '{}', 
+              where incident_id = '{}'
+              """ .format(comment,incident_id))
+            self.cursor.execute(query)
+            count = self.cursor.rowcount
+            if int(count) > 0:
+                return True
+            else:
+                return False   
+        except:
+            return False
+
+    def update_location_admin(self, incident_id,latitude,longitude):
+        """ update location of an incident"""
+        try:
+            query = ("""UPDATE incidents SET 
+             latitude = '{}', longitude = '{}', 
+              where incident_id = '{}'
+              """ .format(latitude,longitude,incident_id))
+            self.cursor.execute(query)
+            count = self.cursor.rowcount
+            if int(count) > 0:
+                return True
+            else:
+                return False   
+        except:
+            return False

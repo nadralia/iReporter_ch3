@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>iReporter || Profile</title>
+	<link rel="stylesheet" type="text/css" href="static/css/main.css">
+	<link rel="stylesheet" type="text/css" href="static/css/profile.css">
+</head>
+<body>
+  <!-- Begin header Section -->
+	<header>
+		<div class="container">
+			<div class="logo">
+				<h1 class="logo-name">i<span class="green-color">Reporter</span></h1>
+			</div>
+			<div class="nav">
+                <a class="login-link" href="create-report.html">Create Report</a>
+                <a class="signup-link"href="view-reports.html">My Reports</a>
+                <a class="signup-link" href="profile.html">Profile</a>
+                <a class="signup-link sign-out" href="index.html">Log out</a>
+			</div>
+		</div>
+  </header>
+<!-- End header Section -->
+<!-- Begin profile Section -->
+ <section class="profile">
+        <div class="profile-wrapper">
+            <div class="profile-content">
+                <h4 id="date"></h4>
+             
+                <div class="incident-data-info incident-data-info-title">
+                    PROFILE
+                </div>
+                <div class="incident-data-info flex-box  u-margin-top-small">
+					 <div class="flex-child tab-content">
+								<div class="col-xs-12 col-sm-3">
+									<span class="profile-picture">
+										<img class="profile-image" src="static/images/avatar.png" alt="Profile Image" />
+									</span>
+									<br>
+									<a href="#"><span><small>Change |</small></span></a>
+									<a href="#"><span><small>Delete</small></span></a>  
+								</div>
+								<div class="col-xs-12 col-sm-9">
+									<h2 class="black">
+									<span id="firstname">|</span><span><small><a href="#"> Edit Profile</a></small></span>
+									</h2>
+								<div class="profile-user-info">
+									<div class="profile-info-row">
+										<div class="profile-info-name">Email
+										</div>
+										<div class="profile-info-value" >
+											<span id="email"></span>
+										</div>
+									</div>
+									<div class="profile-info-row">
+										<div class="profile-info-name" > Phone 
+										</div>
+										<div class="profile-info-value">
+											<span id="phonenumber"></span>
+										</div>
+									</div>
+									<div class="profile-info-row">
+										<div class="profile-info-name"> Country
+										</div>
+										<div class="profile-info-value">
+											<span>Uganda</span>
+										</div>
+									</div>    
+								</div>
+							</div>
+						</div>
+						
+			       <div class="incident-data-info flex-box u-margin-top-small">
+                    <div class="flex-child redflag">
+                        <h4 id="total-redflag"><a href="">0</a></h4><span>RED-FLAGS</span>
+						<div class="flex-child stats redflag-stats">
+                        <ul>
+                            <li><span id="drafted-redflags"><a href="">0</a></span> Drafted</li>
+                            <li><span id="rejected-redflags"><a href="">0</a></span> Rejected</li>
+                            <li><span id="resolved-redflags"><a href="">0</a></span> Resolved</li>
+                            <li><span id="ui-redflags"><a href="">0</a></span> Under Investigation</li>
+                        </ul>
+                    </div>
+                    </div>
+                    <div class="flex-child intervention">
+                        <h4 id="total-interventions"><a href="">0</a></h4><span>INTERVENTIONS</span>
+						<div class="flex-child stats intervention-stats">
+                        <ul>
+                            <li><span id="drafted-interventions"><a href="">0</a></span> Drafted</li>
+                            <li><span id="rejected-interventions"><a href="">0</a></span> Rejected</li>
+                            <li><span id="resolved-interventions"><a href="">0</a></span> Resolved</li>
+                            <li><span id="ui-interventions"><a href="">0</a></span> Under Investigation</li>
+                        </ul>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- End profile Section -->
+<!-- Begin footer Section -->
+<footer class="mb-1">
+    <div>
+        <h3 class="copyright">iReporter &copy; 2018 </h3>
+    </div>
+ </footer>
+ <!-- End footer Section -->
+</body>
+</html>

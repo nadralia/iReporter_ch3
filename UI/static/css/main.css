@@ -1,0 +1,335 @@
+/*********** Base styles ******/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* Global/Custom Components */
+a {
+  text-decoration: none;
+}
+
+body {
+  font-family: "PT Sans", sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+  background-color: #fffffa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: #3c4859;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+footer, 
+header, 
+section {
+    display: block;
+}
+
+label {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'sans-serif';
+    font-weight: 500;
+    color: black;
+}
+/* Home Page */
+
+header {
+  float: left;
+  width: 100%;
+  padding: 5px 0px;
+  box-shadow: 0px 5px 26px #9a9999;
+  background-color: ivory;
+}
+
+section {
+  float: left; 
+  width: 100%; 
+  padding: 0px 0px;
+}
+
+.logo {
+  display: flex; 
+  float: left;
+}
+
+.logo-name {
+  font-weight: 600;
+  font-size: 2em;
+  padding: 15px 40px;
+  text-decoration: none;
+  color: #0facf3;
+  letter-spacing: 0.07em;
+}
+
+.green-color {
+  color: green;
+}
+
+.nav {
+  float: right; 
+  margin-top: 35px; 
+  margin-bottom: 8px;
+}
+
+.login-link, 
+.signup-link {
+  margin-left: 15px;
+  padding: 8px 27px;
+  background: darkslategray;
+  color: white;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 500;
+  border: 1px solid #194c22;
+}
+
+.login-link:hover, 
+.signup-link:hover {
+  background: black;
+  color: lightgreen;
+}
+
+@media only screen and (min-width : 320px) and (max-width : 454px) {
+  .signup_link, .login_link {position: relative; bottom: 24px;}
+}
+
+@media only screen and (min-width : 320px) and (max-width : 741px) {
+  .logo-name-style {
+      font-size: 26px;
+}
+}
+
+.btn {
+  padding: 12px 25px;
+  border-radius: 4px;
+  display: inline-block;
+  min-width: 110px;
+  text-align: center;
+}
+
+.btn-hollow {
+  border: 2px solid #fffffa;
+  color: #fffffa;
+}
+
+.btn-white {
+  background: #fffffa;
+  color: #0facf3;
+  border: 2px solid #fffffa;
+}
+
+
+/* background image Section */
+.background-img {
+  align-items: center;
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(11, 36, 162, 0.5),
+      rgba(40, 180, 133, 0.8)
+    );
+  background-size: cover;
+  height: calc(100vh - 74px);
+  justify-content: center;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 80px;
+}
+
+.background-title,
+.background-paragraph {
+  margin-bottom: 40px;
+}
+
+.background-title {
+  font-size: 3em;
+  text-transform: uppercase;
+}
+
+.background-paragraph {
+  font-size: 1.5em;
+}
+
+.background-link {
+  display: flex;
+  width: 26%;
+  justify-content: space-between;
+}
+
+footer {
+  float: left;
+  width: 100%;
+  background: #fffffa;
+}
+
+.copyright {
+  text-align: center; 
+  font-size: 15px;
+}
+
+section {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+section > .btn {
+  align-self: center;
+}
+
+.steps {
+  display: flex;
+  justify-content: space-between;
+}
+
+.column.step {
+  flex-basis: 50%;
+  flex-direction: column;
+  padding: 20px 50px;
+}
+
+.column .circle-icon {
+  align-self: center;
+  margin-bottom: 20px;
+}
+.how-to{
+  background: #dfe0e2;
+}
+.section-title,
+.section-text {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 130px;
+  border: 1.8px solid #0facf3;
+}
+
+.mb-1 {
+  margin-top: 50px; 
+}
+ 
+/* login styles*/
+.float-right {
+  float: right;
+  margin-right: 100px;
+}
+
+.login-box {
+  width: 389px; 
+  height: 400px;
+  box-shadow: 1px 2px 5px 3px #d2cbcb; 
+  margin-top: 30px;
+  padding-bottom: 20px; 
+  background: rgba(11, 36, 162, 0.5);
+}
+
+input, button {
+  font-family: 'Nunito sans', sans-serif;
+  font-size: 1em;
+  margin: 0;
+  text-decoration: none;
+  outline: none;
+  font-weight: 400;
+  font-size: 16px;
+  color: black;
+}
+
+input::placeholder {
+  color: black;
+  font-size: 16px;
+}
+
+.login-btn{
+  margin: 15px 0px;
+  padding: 0.3em 1.5em;
+  cursor: pointer;
+  padding: 12px 25px;
+  border-radius: 4px;
+  display: inline-block;
+  min-width: 110px;
+  font-family: 'Nunito sans', sans-serif;
+  font-weight: 200;
+}
+
+.login-form {
+  float: left;
+  margin: 10px;
+}
+
+.login-form {
+  float: left;
+  margin: 10px;
+}
+
+
+.login-input {
+  width: 350px;
+  border: 1px solid #C4C4C4;
+  padding: 15px;
+  margin-bottom: 1.5em;
+  background-color: #EAEAEB
+}
+
+.login-text {
+  color: green;
+  text-align: center;
+  margin-top: 1em;
+  padding: 10px;
+     
+}
+
+.login-page {
+  background: #f5f9f7; 
+  float: left; 
+  width: 100%;padding: 10px 0px;
+}
+
+.sign-text {
+  float: left;
+}
+
+.sign-style {
+  color: green; 
+  font-size: 40px; 
+  margin: 0px; 
+  margin-top: 40px;
+  padding: 15px;
+}
+.neutral {
+  text-transform: none;   
+}
+
+.sign-style-min {
+  color: black;
+  margin: 0;
+  margin-bottom: 5px;
+  padding: 15px;
+  font-family: 'Nunito sans', sans-serif;
+  font-size: 22px;
+}
