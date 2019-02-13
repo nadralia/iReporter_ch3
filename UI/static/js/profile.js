@@ -25,13 +25,13 @@ const date = document.getElementById('date');
 date.innerHTML = (new Date()).toLocaleString();
 
 //incident fields
-const count_redflags = document.getElementById('count-redflags');
+const count_redflags = document.getElementById('total-redflag');
 const drafted_redflags = document.getElementById('drafted-redflags');
 const ui_redflags = document.getElementById('ui-redflags');
 const resolved_redflags = document.getElementById('resolved-redflags');
 const rejected_redflags = document.getElementById('rejected-redflags');
 
-const count_interventions = document.getElementById('count-interventions');
+const count_interventions = document.getElementById('total-interventions');
 const drafted_interventions = document.getElementById('drafted-interventions');
 const ui_interventions = document.getElementById('ui-interventions');
 const resolved_interventions = document.getElementById('resolved-interventions');
