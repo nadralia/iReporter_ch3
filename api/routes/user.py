@@ -95,6 +95,7 @@ class Login(MethodView):
                                                         user["username"], user["is_admin"]
                                                 ),
                                                 "message": "Logged in successfully",
+                                                "user":user
                                             }
                                         ],
                                     }

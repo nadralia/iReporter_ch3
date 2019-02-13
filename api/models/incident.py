@@ -49,6 +49,12 @@ class IncidentModel:
         self.cursor.execute("SELECT * FROM incidents WHERE createdBy = '{}'" .format(user_id))
         all_incidents = self.cursor.fetchall()
         return all_incidents
+        
+    def get_all_incidents_by_type_of_user(self, user_id,incident_type):
+        """function to get all incidents"""
+        self.cursor.execute("SELECT * FROM incidents WHERE incident_type = '{}' and createdBy = '{}'" .format(incident_type,user_id))
+        all_incidents = self.cursor.fetchall()
+        return all_incidents
 
     def fetch_single_incident(self,incident_id):
         """function to get details of a incident"""

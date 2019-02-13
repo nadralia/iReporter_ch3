@@ -45,6 +45,12 @@ class IncidentController:
         available_incidents = self.incident_m.get_all_incidents_by_user(user_id)
         return available_incidents 
 
+    def get_all_incidents_by_type_of_user(self, user_id, incident_type):
+        """fetch all available incidents by type"""
+        available_incidents = self.incident_m.get_all_incidents_by_type_of_user(user_id,incident_type)
+        return available_incidents 
+        
+
     def get_single_incident(self, incident_id):
         """fetch a single incidents"""
         incident = self.incident_m.fetch_single_incident(incident_id=incident_id)

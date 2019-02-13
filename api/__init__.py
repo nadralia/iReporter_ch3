@@ -2,6 +2,7 @@ from flask import Flask,jsonify
 from flask_cors import CORS
 from api.routes.user import user_blueprint
 from api.routes.incident import incident_blueprint
+from api.routes.more_incident_endpoint import more_incident_blueprint
 from api.helpers.welcome import welcome_message
 
 
@@ -10,6 +11,7 @@ CORS(app)
 
 app.register_blueprint(user_blueprint)
 app.register_blueprint(incident_blueprint)
+app.register_blueprint(more_incident_blueprint)
 
 @app.route('/')
 def index():

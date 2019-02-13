@@ -57,6 +57,7 @@ class UserModel:
 
     def fetch_a_user(self, username):
         """fetch a user details"""
-        self.cursor.execute("SELECT user_id, username, email,is_admin FROM users WHERE username = '{}'" .format(username))
+        self.cursor.execute("""SELECT user_id, username, firstname,lastname, 
+        email,is_admin,phonenumber,gender FROM users WHERE username = '{}'""" .format(username))
         row = self.cursor.fetchone()
         return row
