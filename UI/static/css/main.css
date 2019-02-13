@@ -333,3 +333,10 @@ input::placeholder {
   font-family: 'Nunito sans', sans-serif;
   font-size: 22px;
 }
+
+.error{
+  color:red;
+}
+.success{
+	color:lightgreen;
+}
