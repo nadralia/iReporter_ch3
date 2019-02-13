@@ -42,6 +42,7 @@ class DatabaseConnection:
             """
 			CREATE TABLE IF NOT EXISTS incidents (
                     incident_id SERIAL PRIMARY KEY NOT NULL,
+                    incident_unique VARCHAR(100) NOT NULL,
                     createdBy INTEGER REFERENCES users(user_id),
                     incident_type VARCHAR(15) NOT NULL,
                     status VARCHAR(50) DEFAULT 'drafted', 
