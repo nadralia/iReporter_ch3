@@ -1,0 +1,97 @@
+/******************* SIGNUP ******************/
+.form-group-title{
+    text-align: center;}
+.signup-wrapper {
+    padding: 5px;
+}
+.signup-form {
+    padding: 2px;
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 0r;
+    margin-bottom: 1rem;
+}
+.signup-form .signup-flexbox {
+    display: flex;
+    margin: 10px;
+    justify-content: space-between;
+    padding: 5px;
+}
+.signup-form .signup-flexbox .flex-child {
+ width: 46%;
+}
+.signup-form .signup-flexbox .flex-child input,
+.signup-form .signup-flexbox .flex-child label {
+    color: black;
+    display: block;
+    width: 100%;
+    background-color: transparent;
+}
+.signup-form .signup-flexbox .flex-child input {
+    padding: .4rem;
+    font-size: 1rem;
+    margin-top: 3px;
+    outline: none;
+	border: 2px solid #0facf3;
+}
+#signup-form-title, #signup-form-title > h2 {
+    color: #eeeeee;
+    padding-bottom: 0;
+    padding-top: 0;
+    margin-top: 1rem;
+}
+.form-group-title > h4 {
+    color: white;
+    font-weight: lighter;
+    letter-spacing: 1px;
+    margin-bottom: 1rem; 
+}
+
+#signup-flexbox-btn {
+    justify-content: center;
+}
+.btn-signup {
+    box-shadow: 3px 3px 8px black;
+    width: 100%;
+    height: 40px;
+    color: white;
+    background-color: #0facf3;
+    font-weight: bolder;
+    font-size: 1rem;
+    outline: none;
+    border: none;
+    border-radius: 3px;
+
+}
+.btn-signup:active {
+    box-shadow: none;
+}
+.flex-child > input[type="file"] {
+    border: 1px solid #eeeeee;
+}
+.div-welcome-user {
+    text-align: center;
+    margin: 2rem;
+    animation: moveInLeft 1s ease .5s; 
+    font-style: oblique;
+    letter-spacing: .1rem;
+    opacity: 0;
+}
+
+select  {
+    outline: 0;
+    overflow: hidden;
+    height: 30px;
+	width: 180px;
+    background: #2c343c;
+    color: #ffffff;
+    border: #2c343c;
+    padding: 5px 3px 5px 10px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 10px;
+}
+
+select option {border: 1px solid #000; background: #010;}
+
+/******************* SIGNUP  ******************/

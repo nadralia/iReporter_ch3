@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>iReporter || Login</title>
+	<link rel="stylesheet" type="text/css" href="static/css/main.css">
+</head>
+<body>
+  <!-- Begin of header Section -->
+	<header>
+		<div class="container">
+			<div class="logo">
+				<h1 class="logo-name">i<span class="green-color">Reporter</span></h1>
+			</div>
+			<div class="nav">
+				<a class="login-link" href="index.html">Home</a>
+				<a class="signup-link" href="signup.html">Sign Up</a>
+			</div>
+		</div>
+  </header>
+  <!-- End of header Section -->
+  <section class="login-page">
+        <div class="container">
+            <div class="sign-text">
+                <h1 class="sign-style">Let Your Voice Count</h1>
+                <h3 class="sign-style-min"><span class="neutral">IReporter</span> Is A Platform That Enables Citizens Report <br>
+                    <span> issues that need government intervention.</span><br>
+                    <span>As a user of the platform, you can also view reports</span><br>
+                    <span>and interventions created by other users.</span></h3>
+            </div>
+            <div class="float-right">
+                <div class="login-box">
+                    <h2 class="login-text">Login</h2>
+					<span class="error" id="error"></span>
+                    <span class="success" id="success"></span>
+                        <form class=" login-form" action="profile.html">
+                            <div class="input-field">
+                                <input type="text" name="username" id="username" class="login-input" placeholder="Enter your username">
+                            </div>
+                            <div class="input-field">
+                                <input type="password" name="password" id="password" class="login-input" placeholder="Enter your password">
+                            </div>
+                            <div class="forgot-password">
+                                <a href="#">Forgot Password?</a>
+                            </div>
+                                <button type="submit" id="login-btn" class="login-btn">Login</button>
+                                <br>
+                                <p>Not yet Registered? <a href="signup.html">Sign Up</a></p>
+                        </form>
+                </div>
+            </div>
+        </div>
+</section>
+<!-- Begin footer Section -->
+<footer class="mb-1">
+    <div>
+        <h3 class="copyright">iReporter &copy; 2018 </h3>
+    </div>
+ </footer>
+ <!-- End footer Section -->
+ <script src="static/js/login.js"></script>
+</body>
+</html>
