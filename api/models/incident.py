@@ -40,19 +40,24 @@ class IncidentModel:
 
     def get_all_incidents(self):
         """function to get all incidents"""
-        self.cursor.execute("SELECT * from incidents")
+        deleted = "False"
+        self.cursor.execute("SELECT * FROM incidents WHERE deleted = '{}'" .format(deleted))
         all_incidents = self.cursor.fetchall()
         return all_incidents
 
     def get_all_incidents_by_user(self, user_id):
         """function to get all incidents"""
-        self.cursor.execute("SELECT * FROM incidents WHERE createdBy = '{}'" .format(user_id))
+        deleted = "False"
+        self.cursor.execute("""SELECT * FROM incidents WHERE createdBy = '{}' and 
+        deleted = '{}'""" .format(user_id, deleted))
         all_incidents = self.cursor.fetchall()
         return all_incidents
         
     def get_all_incidents_by_type_of_user(self, user_id,incident_type):
         """function to get all incidents"""
-        self.cursor.execute("SELECT * FROM incidents WHERE incident_type = '{}' and createdBy = '{}'" .format(incident_type,user_id))
+        deleted = "False"
+        self.cursor.execute("""SELECT * FROM incidents WHERE incident_type = '{}' and
+        deleted = '{}' and createdBy = '{}'""" .format(incident_type,deleted,user_id))
         all_incidents = self.cursor.fetchall()
         return all_incidents
 
@@ -127,7 +132,7 @@ class IncidentModel:
     def update_comment(self, user_id,incident_id,comment):
         """ update comment of an incident"""
         try:
-            query = ("""UPDATE incidents SET comment = '{}', 
+            query = ("""UPDATE incidents SET comment = '{}' 
               where incident_id = '{}' and createdBy = '{}'
               """ .format(comment,incident_id,user_id))
             self.cursor.execute(query)
@@ -139,11 +144,12 @@ class IncidentModel:
         except:
             return False
 
+
     def update_location(self, user_id,incident_id,latitude,longitude):
         """ update location of an incident"""
         try:
             query = ("""UPDATE incidents SET 
-             latitude = '{}', longitude = '{}', 
+             latitude = '{}', longitude = '{}'
               where incident_id = '{}' and createdBy = '{}'
               """ .format(latitude,longitude,incident_id,user_id))
             self.cursor.execute(query)
@@ -158,7 +164,7 @@ class IncidentModel:
     def update_status(self, incident_id,status):
         """ update status of an incident"""
         try:
-            query = ("""UPDATE incidents SET status = '{}', 
+            query = ("""UPDATE incidents SET status = '{}'
               where incident_id = '{}'
               """ .format(status,incident_id))
             self.cursor.execute(query)
@@ -169,10 +175,11 @@ class IncidentModel:
                 return False   
         except:
             return False
+
     def update_comment_admin(self,incident_id,comment):
         """ update comment of an incident"""
         try:
-            query = ("""UPDATE incidents SET comment = '{}', 
+            query = ("""UPDATE incidents SET comment = '{}'
               where incident_id = '{}'
               """ .format(comment,incident_id))
             self.cursor.execute(query)
@@ -188,9 +195,25 @@ class IncidentModel:
         """ update location of an incident"""
         try:
             query = ("""UPDATE incidents SET 
-             latitude = '{}', longitude = '{}', 
+             latitude = '{}', longitude = '{}'
               where incident_id = '{}'
               """ .format(latitude,longitude,incident_id))
+            self.cursor.execute(query)
+            count = self.cursor.rowcount
+            if int(count) > 0:
+                return True
+            else:
+                return False   
+        except:
+            return False
+
+    def soft_delete(self,incident_id,user_id):
+        """ soft delete an incident """
+        deleted = "True"
+        try:
+            query = ("""UPDATE incidents SET deleted = '{}' 
+              where incident_id = '{}' and createdBy = '{}'
+              """ .format(deleted,incident_id,user_id))
             self.cursor.execute(query)
             count = self.cursor.rowcount
             if int(count) > 0:

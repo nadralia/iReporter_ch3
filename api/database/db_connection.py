@@ -51,6 +51,7 @@ class DatabaseConnection:
                     images VARCHAR(100),
                     videos VARCHAR(100),
                     comment VARCHAR(255) NOT NULL,
+                    deleted VARCHAR(14) DEFAULT 'False',
                     createdOn TIMESTAMP WITH TIME ZONE DEFAULT now(),
                     updatedOn TIMESTAMP WITH TIME ZONE DEFAULT now()
 			)

@@ -17,8 +17,11 @@ const latitude = document.getElementById('latitude');
 const longitude = document.getElementById('longitude');
 const image_file = document.getElementById('images');
 const video_file = document.getElementById('videos');
+
+//some validations
 	
 const createIncidentBtn = document.getElementById('create-incident-btn');
+const reportForm = document.getElementById('incident-form');
 
 image_file.addEventListener('change', () => {
     const files = image_file.files;
@@ -49,6 +52,24 @@ video_file.addEventListener('change', () => {
 createIncidentBtn.addEventListener('click', (ev) => {
     ev.preventDefault();    //stop the form submitting
     
+	//some validations
+	const requiredFields = [
+        reportForm.type.value, latitude.value, comment.value
+    ];
+    const missingFields = requiredFields.map((field, index) => {
+        const keys = {
+            0: `<strong>type of report:</strong> red-flag or intervention [select one of the radio buttons]`,
+            1: `<strong>location:</strong> enter your address and we will get the coordinates`,
+            2: `<strong>comment:</strong> tell us more about the case you are reporting`,
+        };
+        return (field === undefined || field === '') ? `=> ${keys[index]}` : null;
+    }).filter(field => field !== null).join('<br />');
+
+    if (reportForm.type.value === '' || latitude.value === ''|| comment.value === '') {
+        msg = `Please provide values for:<br/>${missingFields}`;
+        showDialogMsg(0, 'Incomplete Form', msg, 'left');
+        return false;
+    }
 
 	let formdata = new FormData();
     if(image_file.files.length > 0) {
@@ -70,9 +91,6 @@ createIncidentBtn.addEventListener('click', (ev) => {
         videos: video_file.files[0].name,
         comment: comment.value
     };
-	console.log(userData)
-	
-	console.log(formdata)
 	
     let req = new Request(url, {
         method: 'POST',
