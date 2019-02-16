@@ -11,19 +11,19 @@ class UserModel:
         self.password = kwargs.get('password')
         self.phonenumber = kwargs.get('phonenumber')
         self.gender = kwargs.get('gender')
-        self.is_admin = "False" 
+        self.is_admin = kwargs.get('is_admin')
         self.connect = DatabaseConnection()
         self.cursor = self.connect.dict_cursor
 
     def add_new_user(self,firstname, lastname, othernames,email, username, 
-        password,phonenumber,gender):
+        password,phonenumber,gender,is_admin):
         """ insert a new user in table users"""
         query = (
             """INSERT INTO users (firstname, lastname,othernames, email,username, 
-            password,phonenumber,gender,is_admin) 
+            password,phonenumber,gender, is_admin) 
             VALUES ('{}', '{}', '{}', '{}','{}', '{}', '{}', '{}', '{}'
             )""".format(firstname,lastname,othernames,email, username,password,
-            phonenumber,gender,self.is_admin))
+            phonenumber,gender,is_admin))
 
         self.cursor.execute(query)
 
@@ -61,3 +61,9 @@ class UserModel:
         email,is_admin,phonenumber,gender FROM users WHERE username = '{}'""" .format(username))
         row = self.cursor.fetchone()
         return row
+    
+    def get_all_users(self):
+        """function to get all users"""
+        self.cursor.execute("SELECT * from users")
+        users = self.cursor.fetchall()
+        return users

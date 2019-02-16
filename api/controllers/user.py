@@ -5,16 +5,16 @@ class UserController:
         self.user_m = UserModel()
 
     def create_new_user(self,firstname, lastname,othernames, email, username, 
-        password,phonenumber,gender):
+        password,phonenumber,gender,is_admin):
         """ create a new user and insert in the users table"""
         new_user = UserModel(firstname=firstname, lastname=lastname, othernames=othernames, email=email,
                         username=username, password=password,phonenumber=phonenumber,
-                        gender=gender)
+                        gender=gender,is_admin=is_admin)
 
         self.user_m.add_new_user(firstname=new_user.firstname, lastname=new_user.lastname,
                    othernames=new_user.othernames, email=new_user.email,username=new_user.username, 
-                   password=new_user.password, phonenumber=new_user.phonenumber,gender=new_user.gender
-                            )
+                   password=new_user.password, phonenumber=new_user.phonenumber,gender=new_user.gender,
+                   is_admin=new_user.is_admin)
         return True
 
     def check_if_username_exists(self, username):
@@ -30,3 +30,8 @@ class UserController:
         if login:
             return login
         return False
+
+    def fetch_all_users(self):
+        """fetch all available users"""
+        available_users = self.user_m.get_all_users()
+        return available_users 

@@ -15,9 +15,9 @@ class BaseTestCase(unittest.TestCase):
         self.firstname = "Admin"
         self.lastname = "iReporter"
         self.othernames = "othernames"
-        self.email = "admin@gmail.com"
-        self.username = "admin123"
-        self.password = "admin123N#"
+        self.email = "superadmin@gmail.com"
+        self.username = "superadmin"
+        self.password = "admin123N007#"
         self.phonenumber = "0779-003100"
         self.gender = "Male"
         self.is_admin = "True"
@@ -39,7 +39,7 @@ class BaseTestCase(unittest.TestCase):
     def register_reporter(self):
         user_controller.create_new_user("adralia","nelson","mandela","nelsonadralia@gmail.com", 
                          "nadralia7","nadra29#liAM","0703-000001",
-                                  "Male")
+                                  "Male","False")
 
     def admin_header(self):
        token = generate_token(self.username, self.is_admin)

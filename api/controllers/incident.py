@@ -74,7 +74,7 @@ class IncidentController:
     
     def user_delete_incident(self, user_id, incident_id):
         """delete a incident"""
-        delete_item = self.incident_m.delete_incident_of_user(user_id, incident_id)
+        delete_item = self.incident_m.soft_delete(user_id, incident_id)
         if delete_item:
             return True
         return False
