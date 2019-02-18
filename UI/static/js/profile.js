@@ -4,7 +4,6 @@ if(!sessionStorage.token) {
 
 //get user details
 const token = sessionStorage.token;
-console.log(token);
 const user_firstname = sessionStorage.firstname || '';
 const user_lastname = sessionStorage.lastname || '';
 const user_username = sessionStorage.username || '';
@@ -25,13 +24,13 @@ const date = document.getElementById('date');
 date.innerHTML = (new Date()).toLocaleString();
 
 //incident fields
-const count_redflags = document.getElementById('total-redflag');
+const count_redflags = document.getElementById('count-redflags');
 const drafted_redflags = document.getElementById('drafted-redflags');
 const ui_redflags = document.getElementById('ui-redflags');
 const resolved_redflags = document.getElementById('resolved-redflags');
 const rejected_redflags = document.getElementById('rejected-redflags');
 
-const count_interventions = document.getElementById('total-interventions');
+const count_interventions = document.getElementById('count-interventions');
 const drafted_interventions = document.getElementById('drafted-interventions');
 const ui_interventions = document.getElementById('ui-interventions');
 const resolved_interventions = document.getElementById('resolved-interventions');
@@ -50,8 +49,8 @@ const getUserProfileDetails = async () => {
                  } 
 		};
 
-    const redflags_url = `${rootURL}/red-flags`;
-    const interventions_url = `${rootURL}/interventions`;
+    const redflags_url = "http://127.0.0.1:5000/api/v2/red-flags";
+    const interventions_url = "http://127.0.0.1:5000/api/v2/interventions";
  
     try {
         const redflags_response = await fetch(redflags_url, options);
@@ -75,11 +74,13 @@ let profileDetails = async () => {
 	
 	const interventions_data = user_records.interventions;
     const redflags_data = user_records.redflags;
+	
+	//console.log(interventions_data);
 
     fullname.textContent = `${user_firstname} ${user_lastname}`;
     email.textContent = user_email;
-	//username.textContent = user_username
-	phonenumber.textContent = user_phonenumber
+	username.textContent = user_username
+	//phonenumber.textContent = user_phonenumber
 	//gender.textContent = user_gender
 	if(redflags_data.length > 0){
 		count_redflags.textContent = redflags_data.length;

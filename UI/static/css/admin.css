@@ -1,25 +1,4 @@
 /*********************** ADMIN PAGE *******************/
-.admin-report {
-  display: flex;
-  justify-content: space-between;
-  background: #fffffa;
-  padding: 25px;
-  margin-top: 20px;
-  border-left: 3px solid #0facf3;
-}
-
-.report-stat {
-  text-align: center;
-}
-
-.report-stat > p {
-  font-size: 3em;
-}
-
-.report-stat > span {
-  font-weight: 600;
-}
-
 .section-admin {
     padding: 5px;
     background-color:#eeeeee;

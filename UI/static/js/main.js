@@ -1,4 +1,4 @@
-const rootURL = 'https://dbireporter.herokuapp.com/api/v2';
+const rootURL = 'http://127.0.0.1:5000/api/v2';
 
 //sign-out link
 signOut = document.querySelectorAll('.sign-out');

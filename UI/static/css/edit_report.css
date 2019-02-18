@@ -1,0 +1,219 @@
+/*********************** EDIT-RECORD PAGE *****************/
+#btn-save-changes {
+    font-size: 1rem;
+    width: 100%;
+}
+
+.btn-save-location,
+.btn-save-comment {
+    display: block;
+}
+
+.edit-report {
+}
+.edit-report-flex-box {
+    display: flex;
+    flex-direction: column;
+    padding: 2px;
+    width: 95%;
+    margin: 0 auto;
+}
+.div-over-form-edit {
+    width: 80%;
+    order: 2;
+    margin: 0 auto;
+}
+
+.edit-form {
+    color: rgba(250, 250, 210, .5);
+    margin: 2px;
+    padding: 2px;
+}
+#record-id,
+#record-type {
+    color: #e8491d;
+}
+.edit-flex {
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+} 
+#edit-flex-for-btn {
+    background-color: transparent;
+    justify-content: center;
+}
+.rep-field {
+    padding: 2px;
+    width: 48%;
+}
+.rep-field label {
+    margin-bottom: .5rem;
+    margin-left: 0;
+}
+#rep-field-for-address {
+}
+.edit-btns {
+    cursor: pointer;
+}
+
+.flex-for-btns {
+  padding-left: 8px;
+  margin-top: 2px;
+  display: flex;
+  justify-content: space-between;
+}
+.rep-field-for-id-and-type {
+    background-image: linear-gradient(180deg, rgba(6, 6, 29, .5) 50%,rgba(6, 6, 29, .5), 100%, transparent 0);
+    padding: 1rem 0 1rem 0;
+    border-bottom: 1px solid white;
+}
+
+.edit-form-input {
+   font-family: Georgia, 'Times New Roman', Times, serif;
+   font-style: italic;
+   font-size: 1rem;
+   width: 100%;
+   padding: .5rem .5rem .5rem .5rem;
+   outline: none;
+   color: black;
+   border: 2px solid #0facf3;
+   background-color: rgba(128, 128, 128, .5);
+}
+.edit-form textarea {
+    width: 100%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 17px;
+    font-style: italic;
+    background-color: rgba(128, 128, 128, .5);
+    outline: none;
+    color: white;
+    padding: 1rem;
+}
+#rep-field-textarea {
+    width: 100%;
+}
+
+.edit-form .form-label {
+    display: inline-block;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
+    color: black;
+
+}
+.edit-form .form-label-comment{
+    margin-left: 0;
+}
+.edit-form .form-label-images,
+.edit-form .form-label-videos {
+    margin-left: 5px;
+}
+
+.edit-btns {
+    padding: 2px 5px 2px 5px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1rem;
+    font-style: italic;
+}
+.img-upload-info,
+.vid-upload-info {
+    color: silver;
+    font-style: italic;
+    font-size: 16px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.img-collection-container,
+.vid-collection-container {
+    margin-top: 2rem;
+}
+.img-collection,
+.vid-collection {
+    margin-left: 4px;
+    padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.ic_image-div,
+.vc_video-div {
+    width: 33.33%;
+    height: 10rem;
+    border: 1px solid white;
+}
+.record-img{
+    width: 100%;
+    height: 100%;
+}
+
+.vc_video-div {
+    position: relative;
+    overflow: hidden;
+}
+
+.record-vid {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(.85, .7);
+    cursor: pointer;
+}
+.img-file-input-container,
+.vid-file-input-container {
+    padding-left: 8px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.img-file-input,
+.vid-file-input {
+    cursor: pointer;
+}
+
+#btn-get-current-location {
+    border: none;
+    background: none;
+    outline: none;
+    font-size: 1rem;
+    color: #e8491d;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.edit-input-file-upload {
+    box-sizing: border-box;
+    padding-right: 0;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+.div-edit-form-btn {
+    width: 48%;
+}
+
+.div-over-google-map {
+    width: 80%;
+    margin: 0 auto;
+    order: 1;
+}
+.google-map { 
+    width: 100%;
+    height:10rem;
+    border: 2px solid #35424a;
+    padding: 0;
+    margin-left: 0;
+}
+select  {
+    outline: 0;
+    overflow: hidden;
+    height: 40px;
+	width: 200px;
+    background: #2c343c;
+    color: #ffffff;
+    border: #2c343c;
+    padding: 5px 3px 5px 10px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 10px;
+}
+
+select option {border: 1px solid #000; background: #010;}
+/********************** (END  EDIT-RECORD PAGE) *************/

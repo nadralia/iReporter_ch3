@@ -1,6 +1,9 @@
 /******************* SIGNUP ******************/
 .form-group-title{
     text-align: center;}
+.signup {
+ 
+}
 .signup-wrapper {
     padding: 5px;
 }
@@ -46,7 +49,11 @@
     letter-spacing: 1px;
     margin-bottom: 1rem; 
 }
-
+.here {
+    color: #e8491d;
+    text-decoration: underline;
+    font-weight: bolder;
+}
 #signup-flexbox-btn {
     justify-content: center;
 }

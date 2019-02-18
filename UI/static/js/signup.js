@@ -170,8 +170,7 @@ btnSignup.addEventListener('click', (event) => {
 	
 	let formdata = new FormData();
     formdata.append('file', input.files[0]);
-	
-	console.log(formdata);
+
 	// user details 
     let userData = {
         firstname: first_name.value,
@@ -181,11 +180,11 @@ btnSignup.addEventListener('click', (event) => {
         password: password.value,
         username: user_name.value,
         phonenumber: phone_number.value,
-        gender: gender.value
+        gender: gender.value,
+		is_admin:"False"
     };
-
 	const url = `${rootURL}/auth/signup`;
-	const url2 = `${rootURL}/uploads`;  // endpoint where file will be uploaded
+	const url2 = `${rootURL}/profilepic`;  // endpoint where file will be uploaded
     const options = { method: 'POST',headers: header, mode: 'cors', body:JSON.stringify(userData) };
     const request = new Request(url, options);
 	
