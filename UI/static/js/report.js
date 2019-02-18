@@ -16,8 +16,7 @@ const report_video = document.getElementById('report-video');
 
 {
 	
-	const root = 'http://127.0.0.1:5000/api/v2';
-	const url  = `${root}/incidents/${incident_id}`;
+	const url  = `${rootURL}/incidents/${incident_id}`;
 
 	let options = {
         method: 'GET',

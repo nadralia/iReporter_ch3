@@ -12,30 +12,31 @@ class UserModel:
         self.phonenumber = kwargs.get('phonenumber')
         self.gender = kwargs.get('gender')
         self.is_admin = kwargs.get('is_admin')
+        self.profile_pic = kwargs.get('profile_pic')
         self.connect = DatabaseConnection()
         self.cursor = self.connect.dict_cursor
 
     def add_new_user(self,firstname, lastname, othernames,email, username, 
-        password,phonenumber,gender,is_admin):
+        password,phonenumber,gender,is_admin,profile_pic):
         """ insert a new user in table users"""
         query = (
             """INSERT INTO users (firstname, lastname,othernames, email,username, 
-            password,phonenumber,gender, is_admin) 
-            VALUES ('{}', '{}', '{}', '{}','{}', '{}', '{}', '{}', '{}'
+            password,phonenumber,gender, is_admin,profile_pic) 
+            VALUES ('{}', '{}', '{}', '{}','{}', '{}', '{}', '{}', '{}', '{}'
             )""".format(firstname,lastname,othernames,email, username,password,
-            phonenumber,gender,is_admin))
+            phonenumber,gender,is_admin,profile_pic))
 
         self.cursor.execute(query)
 
     def add_new_admin(self,firstname, lastname, othernames,email, username, 
-        password,phonenumber,gender,is_admin):
+        password,phonenumber,gender,is_admin,profile_pic):
         """ insert a new adim in table users"""
         query = (
             """INSERT INTO users (firstname, lastname,othernames, email,username, 
-            password,phonenumber,gender,is_admin) 
-            VALUES ('{}', '{}', '{}', '{}','{}', '{}', '{}', '{}','{}'
+            password,phonenumber,gender,is_admin,profile_pic) 
+            VALUES ('{}', '{}', '{}', '{}','{}', '{}', '{}', '{}','{}', '{}'
             )""".format(firstname,lastname,othernames,email, username,password,
-            phonenumber,gender,is_admin))
+            phonenumber,gender,is_admin,profile_pic))
 
         self.cursor.execute(query)
 

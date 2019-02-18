@@ -10,7 +10,9 @@ const user_username = sessionStorage.username || '';
 const user_email = sessionStorage.email || '';
 const user_gender = sessionStorage.gender || '';
 const user_phonenumber = sessionStorage.phonenumber || '';
-const profilePicture = sessionStorage.userPicture;
+const profilePicture = sessionStorage.profile_pic;
+
+console.log(profilePicture);
 
 //get fields by ids
 const email = document.getElementById('email');
@@ -19,6 +21,7 @@ const fullname = document.getElementById('fullname');
 const phonenumber = document.getElementById('phonenumber');
 const gender = document.getElementById('gender');
 const profile_pic = document.getElementById('profile-picture');
+const picture_img = document.getElementById('picture-img');
 // The date atop the profile page
 const date = document.getElementById('date');
 date.innerHTML = (new Date()).toLocaleString();
@@ -49,8 +52,8 @@ const getUserProfileDetails = async () => {
                  } 
 		};
 
-    const redflags_url = "http://127.0.0.1:5000/api/v2/red-flags";
-    const interventions_url = "http://127.0.0.1:5000/api/v2/interventions";
+    const redflags_url = `${rootURL}/red-flags`;
+    const interventions_url = `${rootURL}/interventions`
  
     try {
         const redflags_response = await fetch(redflags_url, options);
@@ -80,6 +83,13 @@ let profileDetails = async () => {
     fullname.textContent = `${user_firstname} ${user_lastname}`;
     email.textContent = user_email;
 	username.textContent = user_username
+	//profilePicture.src = profilePicture;
+	const image = document.createElement("img");
+	const imageParent = document.getElementById("picture-div-img");
+	image.id = "id";
+	image.className = "class";
+	image.src = profilePicture;            // image.src = "IMAGE URL/PATH"
+	imageParent.appendChild(image);
 	//phonenumber.textContent = user_phonenumber
 	//gender.textContent = user_gender
 	if(redflags_data.length > 0){

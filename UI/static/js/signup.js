@@ -8,6 +8,7 @@ const password = document.getElementById('password');
 const confirm_password = document.getElementById("confirmpassword");
 const phone_number = document.getElementById('phonenumber');
 const profile_picture = document.getElementById('profile-pic').files[0];
+const profile_pic = document.getElementById('profile-pic');
 const gender = document.getElementById('gender');
 const btnSignup = document.getElementById('btn-signup');
 
@@ -156,72 +157,98 @@ function phoneNumber()
 
 phone_number.onkeyup = phoneNumber;
 
+console.log(cloudary_URL);
 
-btnSignup.addEventListener('click', (event) => {
-    event.preventDefault();//stop the form submitting
+profile_pic.addEventListener('change', function(event){
+	let formData = new FormData();
+	formData.append('file', profile_pic.files[0]);
+	formData.append('upload_preset', cloudinary_upload_preset)
 	
-	//create any headers we want
-	let header = new Headers();
-    header.append('Content-Type', 'application/json');
-    header.append('Accept', 'application/json');
-	
-	// file that has been selected in the form
-	const input = document.querySelector('input[type="file"]');
-	
-	let formdata = new FormData();
-    formdata.append('file', input.files[0]);
+	axios({
+		url: cloudary_URL,
+		method: 'POST',
+		headers:{
+			'Content-Type':'application/x-www-form-urlencoded'
+		},
+		data:formData
+	}).then(function(response){
+		console.log(response.data.secure_url);
+		let images_file_url = response.data.secure_url; 
+		
+		btnSignup.addEventListener('click', (event) => {
+			event.preventDefault();//stop the form submitting
+			
+			//create any headers we want
+			let header = new Headers();
+			header.append('Content-Type', 'application/json');
+			header.append('Accept', 'application/json');
+			
+			// file that has been selected in the form
+			const input = document.querySelector('input[type="file"]');
+			
+			let formdata = new FormData();
+			formdata.append('file', input.files[0]);
 
-	// user details 
-    let userData = {
-        firstname: first_name.value,
-        lastname: last_name.value,
-        othernames: other_name.value,
-        email: email.value,
-        password: password.value,
-        username: user_name.value,
-        phonenumber: phone_number.value,
-        gender: gender.value,
-		is_admin:"False"
-    };
-	const url = `${rootURL}/auth/signup`;
-	const url2 = `${rootURL}/profilepic`;  // endpoint where file will be uploaded
-    const options = { method: 'POST',headers: header, mode: 'cors', body:JSON.stringify(userData) };
-    const request = new Request(url, options);
-	
-	fetch(request)
-        .then((response) => response.json())
-        .then((data) => {
-            if (data.status === 400) {
-                //validation error
-                error.style.display = "block";
-                error.innerHTML = data.message;
-            } else if (data.status === 409) {
-                //user exists error
-                error.style.display = "block";
-                error.innerHTML = data.message;
+			// user details 
+			let userData = {
+				firstname: first_name.value,
+				lastname: last_name.value,
+				othernames: other_name.value,
+				email: email.value,
+				password: password.value,
+				username: user_name.value,
+				phonenumber: phone_number.value,
+				gender: gender.value,
+				profile_pic:images_file_url,
+				is_admin:"False"
+			};
+			const url = `${rootURL}/auth/signup`;
+			const url2 = `${rootURL}/profilepic`;  // endpoint where file will be uploaded
+			const options = { method: 'POST',headers: header, mode: 'cors', body:JSON.stringify(userData) };
+			const request = new Request(url, options);
+			
+			fetch(request)
+				.then((response) => response.json())
+				.then((data) => {
+					if (data.status === 400) {
+						//validation error
+						error.style.display = "block";
+						error.innerHTML = data.message;
+					} else if (data.status === 409) {
+						//user exists error
+						error.style.display = "block";
+						error.innerHTML = data.message;
 
-            } else if (data.status === 201) {
-                //User account created and redirect to login page
-				success.style.display = "block";
-                success.innerHTML = data["data"][0].message;
-				return fetch(url2, {
-				method: 'POST',
-				body: formdata
-			    });
-                
-            }else {
-                // throw new Error
-                error.style.display = "block";
-                error.innerHTML = data;
-            }
-        }).then(function(response){
-        // do something with the response
-			setTimeout(()=> {
-                    redirect:window.location.replace('./login.html');
-                }, 3000);
-        })
-        .catch( (err) =>{
-            console.log('ERROR:', err);
-        });
+					} else if (data.status === 201) {
+						//User account created and redirect to login page
+						success.style.display = "block";
+						success.innerHTML = data["data"][0].message;
+						return fetch(url2, {
+						method: 'POST',
+						body: formdata
+						});
+						
+					}else {
+						// throw new Error
+						error.style.display = "block";
+						error.innerHTML = data;
+					}
+				}).then(function(response){
+				// do something with the response
+					setTimeout(()=> {
+							redirect:window.location.replace('./login.html');
+						}, 3000);
+				})
+				.catch( (err) =>{
+					console.log('ERROR:', err);
+				});
+			
+		});
+		
+	}).catch(function(err){
+		console.log(err);
+	});
 	
 });
+
+

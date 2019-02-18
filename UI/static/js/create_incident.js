@@ -7,8 +7,8 @@ if(!sessionStorage.token) {
 
 const token = sessionStorage.token;
 
-const url = 'http://127.0.0.1:5000/api/v2/incidents';
-const url2 = 'http://127.0.0.1:5000/api/v2/uploads';  // endpoint where file will be uploaded
+const url =`${rootURL}/incidents`;
+const url2 = `${rootURL}/uploads`;  // endpoint where file will be uploaded
 
 const incident_type = document.getElementById('incident_type');
 const comment = document.getElementById('comment');
@@ -45,66 +45,89 @@ video_file.addEventListener('change', () => {
     }
 });
 
-createIncidentBtn.addEventListener('click', (ev) => {
-    ev.preventDefault();    //stop the form submitting
-    
+image_file.addEventListener('change', function(event){
+	var formData = new FormData();
+	formData.append('file', image_file.files[0]);
+	formData.append('upload_preset', cloudinary_upload_preset)
+	
+	axios({
+		url: cloudary_URL,
+		method: 'POST',
+		headers:{
+			'Content-Type':'application/x-www-form-urlencoded'
+		},
+		data:formData
+	}).then(function(response){
+		console.log(response);
+		let images_file_url = response.data.secure_url; 
+		createIncidentBtn.addEventListener('click', (ev) => {
+			ev.preventDefault();    //stop the form submitting
+			
 
-	let formdata = new FormData();
-    if(image_file.files.length > 0) {
-            for (let i = 0; i < image_file.files.length; i++) {
-                formdata.append('images', image_file.files[i]);
-            }
-        }
-        if(video_file.files.length > 0) {
-            for (let i = 0; i < video_file.files.length; i++) {
-                formdata.append('videos', video_file.files[i]);
-            }
-        }
-	
-	let userData = {
-        incident_type: incident_type.value,
-        latitude: latitude.value,
-        longitude: longitude.value,
-        images: image_file.files[0].name,
-        videos: video_file.files[0].name,
-        comment: comment.value
-    };
-	console.log(userData)
-	
-	console.log(formdata)
-	
-	let options = {
-        method: 'POST',
-        headers: {
-           'Content-type':'application/json',
-            Authorization: `Bearer ${token}`
-        },
-        mode: 'cors',
-        body: JSON.stringify(userData)
-    }
-	
-    let req = new Request(url,options);
-    fetch(req)
-	    .then((response) => response.json())
-        .then( (data)=>{
-            console.log(formdata);
-			return fetch(url2, {
+			let formdata = new FormData();
+			if(image_file.files.length > 0) {
+					for (let i = 0; i < image_file.files.length; i++) {
+						formdata.append('images', image_file.files[i]);
+					}
+				}
+				if(video_file.files.length > 0) {
+					for (let i = 0; i < video_file.files.length; i++) {
+						formdata.append('videos', video_file.files[i]);
+					}
+				}
+			
+			let userData = {
+				incident_type: incident_type.value,
+				latitude: latitude.value,
+				longitude: longitude.value,
+				images: images_file_url,
+				videos: video_file.files[0].name,
+				comment: comment.value
+			};
+			console.log(userData)
+			
+			console.log(formdata)
+			
+			let options = {
 				method: 'POST',
-				body: formdata
-			});
-
-        })
-		.then(function(response){
-        // do something with the response
-		    console.log(response.status);
-			if (response.status === 200){
-				setTimeout(()=> {
-                    redirect:window.location.replace('./view-reports.html');
-                }, 3000);
+				headers: {
+				   'Content-type':'application/json',
+					Authorization: `Bearer ${token}`
+				},
+				mode: 'cors',
+				body: JSON.stringify(userData)
 			}
+			
+			let req = new Request(url,options);
+			fetch(req)
+				.then((response) => response.json())
+				.then( (data)=>{
+					console.log(formdata);
+					return fetch(url2, {
+						method: 'POST',
+						body: formdata
+					});
+
+				})
+				.then(function(response){
+				// do something with the response
+					console.log(response.status);
+					if (response.status === 200){
+						setTimeout(()=> {
+							
+							redirect:window.location.replace('./view-reports.html');
+						}, 3000);
+					}
+				
+				})
+				.catch( (err) =>{
+					console.log('ERROR:', err.message);
+				});
+		});
 		
-        })
-	    .catch( (err) =>{
-            console.log('ERROR:', err.message);
-        });
+	}).catch(function(err){
+		console.log(err);
+	});
+	
 });
+
