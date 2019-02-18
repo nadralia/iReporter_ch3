@@ -7,6 +7,14 @@
 	<title>iReporter || Create Report</title>
 	<link rel="stylesheet" type="text/css" href="static/css/main.css">
 	<link rel="stylesheet" type="text/css" href="static/css/report.css">
+	 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+   integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+   crossorigin=""/>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+   integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+   crossorigin=""></script>
+   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
   <!-- Begin header Section -->
@@ -26,18 +34,18 @@
   <!-- End header Section -->
   <!-- Begin create incident Section -->
      <section class="incident">
-        <div class="container-flex">
-            <div class="map-field">
+        <div class="incident-flex-box">
+            <div class="div-over-map-incident">
 			     <h2 class="title-heading" id="form-incident-title">
                     Create a Report
                 </h2>
                 <div class="google-map" id="google-map">Map Area</div>
             </div>
-            <div class="form-wrapper">
+            <div class="div-over-form-incident">
 			    
                 <form action="#" class="incident-form" id="incident-form">
                    
-                    <div class="lat-long-field input-flex"> 
+                    <div class="div-lat-and-long incident-input-flex"> 
                         <div class="incident-field">
                             <input type="text" class="incident-form-input" id="latitude" placeholder="Latitude" required>
                         </div>
@@ -45,7 +53,7 @@
                             <input type="text" class="incident-form-input" id="longitude" placeholder="Longitude" required>
                         </div>
                     </div>
-                    <div class="image-video-field input-flex">
+                    <div class="div-over-upload-group incident-input-flex">
                         <div class="incident-field incident-field-for-upload">
                             <div class="upload-group">
                                 <label for="pic" class="upload-label">Images</label>
@@ -60,13 +68,13 @@
                         </div>
                     </div>
 					
-                    <div class="input-flex" id="form-group-last-child">
+                    <div class="incident-input-flex" id="form-group-last-child">
                         <div class="incident-field" id="incident-field-textarea">
                             <textarea name="comment" id="comment" rows="6" placeholder="Tell us more about this incident"></textarea>
                         </div>
                     </div>
 
-					<div id="radio-container" class= "input-flex">
+					<div id="radio-container" class= "incident-input-flex">
 						<label for="incident_type">Incident Type</label>
 						<select id="incident_type">
 							<option>Select Incident Type</option>
@@ -74,7 +82,7 @@
 							<option value="red-flag">Red-flag</option>
 						</select>
                     </div>
-                    <div class="input-flex" id="input-flex-for-btn">
+                    <div class="incident-input-flex" id="incident-input-flex-for-btn">
                         <div class="div-incident-form-btn">
                             <button class="btn" id="create-incident-btn">Create Report</button>
                         </div>
@@ -93,7 +101,8 @@
     </div>
  </footer>
  <!-- End footer Section -->
- <script src="static/js/main.js"></script>
- <script src="static/js/create_incident.js"></script>
+  <script src="static/js/main.js"></script>
+  <script src="static/js/maps.js"></script>
+  <script src="static/js/create_incident.js"></script>
 </body>
 </html>

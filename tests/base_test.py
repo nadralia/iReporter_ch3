@@ -21,6 +21,7 @@ class BaseTestCase(unittest.TestCase):
         self.phonenumber = "0779-003100"
         self.gender = "Male"
         self.is_admin = "True"
+        self.profile_pic = "profile_pic.jpg"
         self.app = app.test_client(self)
         db_conn.create_tables()
         self.register_admin()
@@ -34,12 +35,12 @@ class BaseTestCase(unittest.TestCase):
     def register_admin(self):
         user_m.add_new_admin(self.firstname,self.lastname,
         self.othernames,self.email,self.username, self.password, 
-        self.phonenumber,self.gender,self.is_admin)
+        self.phonenumber,self.gender,self.is_admin,self.profile_pic)
         
     def register_reporter(self):
         user_controller.create_new_user("adralia","nelson","mandela","nelsonadralia@gmail.com", 
                          "nadralia7","nadra29#liAM","0703-000001",
-                                  "Male","False")
+                                  "Male","False","profile.jpg")
 
     def admin_header(self):
        token = generate_token(self.username, self.is_admin)

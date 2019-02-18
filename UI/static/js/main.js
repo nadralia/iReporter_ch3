@@ -1,4 +1,6 @@
 const rootURL = 'https://dbireporter.herokuapp.com/api/v2';
+const cloudary_URL = 'https://api.cloudinary.com/v1_1/nadralia/image/upload';
+const cloudinary_upload_preset = 'ieuvgsby';
 
 //sign-out link
 signOut = document.querySelectorAll('.sign-out');

@@ -11,25 +11,8 @@ const options = {
 						Authorization: `Bearer ${token}`
 					} 
 				 };
+const url = `${rootURL}/incidents`;
 
-const redflags_url = `${rootURL}/red-flags`;
-const interventions_url = `${rootURL}/interventions`;
-
-const redflagsFetch = fetch(redflags_url, options);
-const interventionsFetch = fetch(interventions_url, options);
-
-Promise.all([redflagsFetch, interventionsFetch])
-.then((responseArr) => {
-    responseArr.forEach(response => {
-        getResponse(response.json()); // the .json() method returns a promise
-    });
-}).catch(err => {
-    console.log(err);
-});
-
-//my_report section report-history-section
-//div report-history-section-content
-//div       
 
 const reportSection = document.getElementById('section-reporthistory-wrapper')
 const reportHistory = document.createElement('div');
@@ -43,9 +26,14 @@ let idCell, typeCell, createdOnCell, detailsCell, statusCell,imagesCell, vidoesC
 let idValueCell, typeValueCell, createdOnValueCell, detailsValueCell, statusValueCell,
 imagesValueCell, vidoesValueCell,actionsValueCell;
 
-const getResponse = (responseJson) => {
-    responseJson.then((responseObj) => {
-		
+view_incidents();
+
+function view_incidents() {
+
+    fetch(url, options)
+    .then(response => response.json())
+    .then(data => {
+        console.log('successful', data);
 		const reportCard = document.createElement('div');
 		reportCard.className = 'flex-box-main';
 				
@@ -102,14 +90,11 @@ const getResponse = (responseJson) => {
 				
 		documentfragment.appendChild(firstRow);
 		
-		count += 1;
-        records = records.concat(responseObj.data); // merge new array with the existing one.
-
-       if(count > 1) { // i. if process() function has been called twice, since we are making two requests
-           if (records.length > 0) {
-               records.sort((a, b) => a.id - b.id);
-               records.forEach(record => {
-				   
+        var item_count = data.available_incidents.length;
+        if (item_count > 0){
+            let row_count = 0;
+            for (row_count; row_count<item_count; row_count++) {
+                let field_entry = data.available_incidents[row_count];
 				//create the row to handle the values
 				secondRow = document.createElement('tr');
 				secondRow.className = 'table-row';
@@ -128,19 +113,19 @@ const getResponse = (responseJson) => {
 				actionsValueCell.className = 'table-cell';
 				
 				 // 2nd row: record type
-				idValueCell.textContent = record.incident_id;
+				idValueCell.textContent = field_entry["incident_id"];
 				secondRow.appendChild(idValueCell);
 				
-				typeValueCell.textContent = record.incident_type;
+				typeValueCell.textContent = field_entry["incident_type"];
 				secondRow.appendChild(typeValueCell);
 				
-				createdOnValueCell.textContent = record.createdon;
+				createdOnValueCell.textContent = field_entry["createdon"];
 				secondRow.appendChild(createdOnValueCell);
 				
-				detailsValueCell.textContent = record.comment;
+				detailsValueCell.textContent = field_entry["comment"];
 				secondRow.appendChild(detailsValueCell);
 				
-				statusValueCell.textContent = record.status;
+				statusValueCell.textContent = field_entry["status"];
 				secondRow.appendChild(statusValueCell);
 				
 				secondRow.appendChild(actionsValueCell);
@@ -148,7 +133,7 @@ const getResponse = (responseJson) => {
 				//delete button
 				const btnDelete = document.createElement('button');
                 btnDelete.className = 'btn';
-                btnDelete.id = 'btn-edit-report';
+                btnDelete.id = 'btn-delete-report';
                 btnDelete.textContent = 'Delete';
                 
 				//Edit button
@@ -159,14 +144,14 @@ const getResponse = (responseJson) => {
                 
 				
 				// attach the 'buttons' if record status is 'drafted';
-                if (record.status === 'drafted') {
+                if (field_entry["status"] === 'drafted') {
                     actionsValueCell.appendChild(btnDelete);
                     actionsValueCell.appendChild(btnEdit);
                 }
 				
 				const btnView = document.createElement('button');
                 btnView.className = 'btn';
-                btnView.id = 'btn-edit-report';
+                btnView.id = 'btn-view-report';
                 btnView.textContent = 'View';
                 actionsValueCell.appendChild(btnView);
 				
@@ -178,34 +163,87 @@ const getResponse = (responseJson) => {
 				
 				reportHistory.appendChild(reportCard);
 				
+				
+			//add click event 
+			// add click event to 'delete button'
+                btnDelete.addEventListener('click', async (event) => {
+					let x = confirm("Are you sure you want to delete this report?");
+					if (x){
+					   try {
+						  const delete_report = await deleteReport(field_entry["incident_id"]);
+						} catch(err) {
+							console.log(err);
+						};
+					}
+					else{
+						return false;
+					}
+					   
+				});
 				// add click event to 'edit button';
                 btnEdit.addEventListener('click', () => {
-                       localStorage.recordId = record.incident_id;
-                       localStorage.recordType = record.incident_type;
-                       localStorage.recordLatitude = record.latitude;
-					   localStorage.recordLongitude = record.longitude;
-                       localStorage.recordComment = record.comment;
-                       localStorage.recordImages = record.images;
-                       localStorage.recordVideos = record.videos;
+                       localStorage.recordId = field_entry["incident_id"];
+                       localStorage.recordType =field_entry["incident_type"];
+                       localStorage.recordLatitude = field_entry["latitude"];
+					   localStorage.recordLongitude = field_entry["longitude"];
+                       localStorage.recordComment = field_entry["comment"];
+                       localStorage.recordImages = field_entry["images"];
+                       localStorage.recordVideos = field_entry["videos"];
 					   redirect:window.location.replace('./edit-report.html');//redirect to edit report page'
                 });
 				
 				// add click event to 'edit button';
                 btnView.addEventListener('click', () => {
-                       localStorage.recordId = record.incident_id;
-                       localStorage.recordType = record.incident_type;
-                       localStorage.recordLatitude = record.latitude;
-					   localStorage.recordLongitude = record.longitude;
-                       localStorage.recordComment = record.comment;
-                       localStorage.recordImages = record.images;
-                       localStorage.recordVideos = record.videos;
+                       localStorage.recordId = field_entry["incident_id"];
+                       localStorage.recordType =field_entry["incident_type"];
+                       localStorage.recordLatitude = field_entry["latitude"];
+					   localStorage.recordLongitude = field_entry["longitude"];
+                       localStorage.recordComment = field_entry["comment"];
+                       localStorage.recordImages = field_entry["images"];
+                       localStorage.recordVideos = field_entry["videos"];
 					   redirect:window.location.replace('./view-report.html');//redirect to view report page
                 });
-				   
-			   });
-			   reportSection.appendChild(reportHistory);
-		   }
-	   }
-		
+				
+				reportSection.appendChild(reportHistory);
+
+            }
+        }
+        else{
+            alert("No incidents available");
+        }
+                
+    })
+    .catch(function (error) {
+        console.log('Request failed', error);
     });
+}
+
+
+
+let deleteReport = async (incident_id) => {
+	
+    const del_url = `${rootURL}/incidents/${incident_id}`;
+    const options = { 
+	                 method: 'DELETE', 
+					 mode: 'cors', 
+					 headers: {
+					   'Content-type':'application/json',
+						Authorization: `Bearer ${token}`
+					} 
+					};
+
+    const request = new Request(del_url, options);
+
+    try {
+        const response = await fetch(request);
+        const jsonData = await response.json();
+        if(jsonData.status === 200) {
+            
+        } else {
+            console.log(jsonData)
+			redirect:window.location.reload();
+        }
+    } catch (err) {
+        console.log(err);
+    }
 };

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>iReporter || Edit Reports</title>
+	<link rel="stylesheet" type="text/css" href="static/css/main.css">
+	<link rel="stylesheet" type="text/css" href="static/css/edit_report.css">
+</head>
+<body>
+  <!-- Begin header Section -->
+	<header>
+		<div class="container">
+			<div class="logo">
+				<h1 class="logo-name">i<span class="green-color">Reporter</span></h1>
+			</div>
+			<div class="nav">
+                <a class="login-link" href="create-report.html">Create Report</a>
+                <a class="signup-link"href="view-reports.html">My Reports</a>
+                <a class="signup-link" href="profile.html">Profile</a>
+                <a class="signup-link sign-out" href="index.html">Log out</a>
+			</div>
+		</div>
+  </header>
+  <!-- End header Section -->
+  <!-- Begin edit report Section -->
+     <section class="edit-report">
+        <div class="edit-report-flex-box">
+            <div class="div-over-form-edit">
+                <form action="#" class="edit-form" id="edit-form">
+                    <div class="id-type-div edit-flex">
+                        <div class="rep-field rep-field-for-id-and-type">
+                            <h3>Incident ID: <span id="incident-id"></span></h3>
+                        </div>
+                        <div class="rep-field rep-field-for-id-and-type">
+                            <h3>Incident Type: <span id="incident-type"></span></h3>
+                        </div>
+                    </div>
+					<div class="lat-long view-flex">
+                        
+                    </div>
+					<div id="radio-container" class= "edit-flex">
+						<h3> Report Status: <span id="report-status"></span></h3>
+						<select id="incident_type">
+							<option>Change Report Status</option>
+							<option value="drafted">Drafted</option>
+							<option value="under investigation">Under Investigation</option>
+							<option value="resolved">Resolved</option>
+							<option value="rejected">Rejected</option>
+						</select>
+                    </div>
+                    <div class="edit-flex" id="incident-input-flex-for-btn">
+                        <div class="div-incident-form-btn">
+                            <button class="btn" id="edit-incident-btn">Edit Status</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </section>
+<!-- End edit report Section -->
+
+<!-- Begin footer Section -->
+<footer class="mb-1">
+    <div>
+        <h3 class="copyright">iReporter &copy; 2018 </h3>
+    </div>
+ </footer>
+ <!-- End footer Section -->
+<script src="js/main.js"></script>
+<script src="js/edit_report.js"></script>
+</body>
+</html>

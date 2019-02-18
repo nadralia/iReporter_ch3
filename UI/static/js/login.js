@@ -38,6 +38,7 @@ loginBtn.addEventListener('click', (event) => {
             } else if (data.status === 200) {
                 //Logged in successfully and redirect to profile page
 				sessionStorage.token = data["data"][0].token;
+				sessionStorage.is_admin = data["data"][0]["user"].is_admin;
 				sessionStorage.firstname = data["data"][0]["user"].firstname;
 				sessionStorage.lastname = data["data"][0]["user"].lastname;
 				sessionStorage.username = data["data"][0]["user"].username;
@@ -45,7 +46,8 @@ loginBtn.addEventListener('click', (event) => {
 				sessionStorage.email = data["data"][0]["user"].email;
 				sessionStorage.gender = data["data"][0]["user"].gender;
 				sessionStorage.phonenumber = data["data"][0]["user"].phonenumber;
-				//sessionStorage.profile_pic = data["data"][0]["user"].profile_pic;
+				sessionStorage.profile_pic = data["data"][0]["user"].profile_pic;
+				//console.log(data["data"][0]["user"].is_admin);
 				if(data["data"][0]["user"].is_admin === "False") {
 				    redirect:window.location.replace('./profile.html');
 				} else {

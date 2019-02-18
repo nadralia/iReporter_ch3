@@ -28,6 +28,7 @@ class RegisterUser(MethodView):
             phonenumber = data.get("phonenumber")
             gender = data.get("gender")
             is_admin = data.get("is_admin")
+            profile_pic = data.get("profile_pic")
 
             hashed_password = generate_password_hash(password, method='sha256')
 
@@ -44,7 +45,7 @@ class RegisterUser(MethodView):
             
             new_user = user_controller.create_new_user(firstname=firstname, lastname=lastname,
                     othernames=othernames,email=email,username=username, password=hashed_password, 
-                    phonenumber=phonenumber, gender=gender, is_admin=is_admin) 
+                    phonenumber=phonenumber, gender=gender, is_admin=is_admin,profile_pic=profile_pic) 
             
             if new_user:
                 user = user_controller.get_user(username=username)

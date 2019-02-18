@@ -5,16 +5,16 @@ class UserController:
         self.user_m = UserModel()
 
     def create_new_user(self,firstname, lastname,othernames, email, username, 
-        password,phonenumber,gender,is_admin):
+        password,phonenumber,gender,is_admin,profile_pic):
         """ create a new user and insert in the users table"""
         new_user = UserModel(firstname=firstname, lastname=lastname, othernames=othernames, email=email,
                         username=username, password=password,phonenumber=phonenumber,
-                        gender=gender,is_admin=is_admin)
+                        gender=gender,is_admin=is_admin,profile_pic=profile_pic)
 
         self.user_m.add_new_user(firstname=new_user.firstname, lastname=new_user.lastname,
                    othernames=new_user.othernames, email=new_user.email,username=new_user.username, 
                    password=new_user.password, phonenumber=new_user.phonenumber,gender=new_user.gender,
-                   is_admin=new_user.is_admin)
+                   is_admin=new_user.is_admin,profile_pic=new_user.profile_pic)
         return True
 
     def check_if_username_exists(self, username):

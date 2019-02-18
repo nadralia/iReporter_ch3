@@ -7,9 +7,8 @@ if(!sessionStorage.token) {
 
 const token = sessionStorage.token;
 
-const url = `${rootURL}/incidents`;
+const url =`${rootURL}/incidents`;
 const url2 = `${rootURL}/uploads`;  // endpoint where file will be uploaded
-
 
 const incident_type = document.getElementById('incident_type');
 const comment = document.getElementById('comment');
@@ -18,10 +17,7 @@ const longitude = document.getElementById('longitude');
 const image_file = document.getElementById('images');
 const video_file = document.getElementById('videos');
 
-//some validations
-	
 const createIncidentBtn = document.getElementById('create-incident-btn');
-const reportForm = document.getElementById('incident-form');
 
 image_file.addEventListener('change', () => {
     const files = image_file.files;
@@ -49,79 +45,89 @@ video_file.addEventListener('change', () => {
     }
 });
 
-createIncidentBtn.addEventListener('click', (ev) => {
-    ev.preventDefault();    //stop the form submitting
-    
-	//some validations
-	const requiredFields = [
-        reportForm.type.value, latitude.value, comment.value
-    ];
-    const missingFields = requiredFields.map((field, index) => {
-        const keys = {
-            0: `<strong>type of report:</strong> red-flag or intervention [select one of the radio buttons]`,
-            1: `<strong>location:</strong> enter your address and we will get the coordinates`,
-            2: `<strong>comment:</strong> tell us more about the case you are reporting`,
-        };
-        return (field === undefined || field === '') ? `=> ${keys[index]}` : null;
-    }).filter(field => field !== null).join('<br />');
-
-    if (reportForm.type.value === '' || latitude.value === ''|| comment.value === '') {
-        msg = `Please provide values for:<br/>${missingFields}`;
-        showDialogMsg(0, 'Incomplete Form', msg, 'left');
-        return false;
-    }
-
-	let formdata = new FormData();
-    if(image_file.files.length > 0) {
-            for (let i = 0; i < image_file.files.length; i++) {
-                formdata.append('images', image_file.files[i]);
-            }
-    }
-    if(video_file.files.length > 0) {
-        for (let i = 0; i < video_file.files.length; i++) {
-            formdata.append('videos', video_file.files[i]);
-        }
-    }
+image_file.addEventListener('change', function(event){
+	var formData = new FormData();
+	formData.append('file', image_file.files[0]);
+	formData.append('upload_preset', cloudinary_upload_preset)
 	
-	let userData = {
-        incident_type: incident_type.value,
-        latitude: latitude.value,
-        longitude: longitude.value,
-        images: image_file.files[0].name,
-        videos: video_file.files[0].name,
-        comment: comment.value
-    };
-	
-    let req = new Request(url, {
-        method: 'POST',
-        headers: {
-           'Content-type':'application/json',
-            Authorization: `Bearer ${token}`
-        },
-        mode: 'cors',
-        body: JSON.stringify(userData)
-    });
-    fetch(req)
-	    .then((response) => response.json())
-        .then( (data)=>{
+	axios({
+		url: cloudary_URL,
+		method: 'POST',
+		headers:{
+			'Content-Type':'application/x-www-form-urlencoded'
+		},
+		data:formData
+	}).then(function(response){
+		console.log(response);
+		let images_file_url = response.data.secure_url; 
+		createIncidentBtn.addEventListener('click', (ev) => {
+			ev.preventDefault();    //stop the form submitting
+			
 
-			return fetch(url2, {
+			let formdata = new FormData();
+			if(image_file.files.length > 0) {
+					for (let i = 0; i < image_file.files.length; i++) {
+						formdata.append('images', image_file.files[i]);
+					}
+				}
+				if(video_file.files.length > 0) {
+					for (let i = 0; i < video_file.files.length; i++) {
+						formdata.append('videos', video_file.files[i]);
+					}
+				}
+			
+			let userData = {
+				incident_type: incident_type.value,
+				latitude: latitude.value,
+				longitude: longitude.value,
+				images: images_file_url,
+				videos: video_file.files[0].name,
+				comment: comment.value
+			};
+			console.log(userData)
+			
+			console.log(formdata)
+			
+			let options = {
 				method: 'POST',
-				body: formdata
-			});
-
-        })
-		.then(function(response){
-        // do something with the response
-		    console.log(response.status);
-			if (response.status === 200){
-				setTimeout(()=> {
-                    redirect:window.location.replace('./view-reports.html');
-                }, 3000);
+				headers: {
+				   'Content-type':'application/json',
+					Authorization: `Bearer ${token}`
+				},
+				mode: 'cors',
+				body: JSON.stringify(userData)
 			}
+			
+			let req = new Request(url,options);
+			fetch(req)
+				.then((response) => response.json())
+				.then( (data)=>{
+					console.log(formdata);
+					return fetch(url2, {
+						method: 'POST',
+						body: formdata
+					});
+
+				})
+				.then(function(response){
+				// do something with the response
+					console.log(response.status);
+					if (response.status === 200){
+						setTimeout(()=> {
+							
+							redirect:window.location.replace('./view-reports.html');
+						}, 3000);
+					}
+				
+				})
+				.catch( (err) =>{
+					console.log('ERROR:', err.message);
+				});
+		});
 		
-        })
-	    .catch( (err) =>{
-            console.log('ERROR:', err.message);
-        });
+	}).catch(function(err){
+		console.log(err);
+	});
+	
 });
+

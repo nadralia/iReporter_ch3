@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>iReporter || View Report</title>
 	<link rel="stylesheet" type="text/css" href="static/css/main.css">
-	<link rel="stylesheet" type="text/css" href="static/css/reports.css">
+	<link rel="stylesheet" type="text/css" href="static/css/view_report.css">
 </head>
 <body>
   <!-- Begin header Section -->
@@ -19,18 +19,63 @@
                 <a class="login-link" href="create-report.html">Create Report</a>
                 <a class="signup-link" href="view-reports.html">My Reports</a>
                 <a class="signup-link" href="profile.html">Profile</a>
-                <a class="signup-link sign-out" href="../index.html">Log out</a>
+                <a class="signup-link sign-out" href="index.html">Log out</a>
 			</div>
 		</div>
   </header>
 <!-- End header Section -->
-<!-- Begin reports Section -->
-    <section class="report-history-section">
-        <div class="report-history-section-content" id="section-reporthistory-wrapper">
-          
+<!-- Begin view report Section -->
+ <section class="view-report">
+        <div class="view-report-flex-box">
+            <div class="div-over-form-view">
+				<div class="div-over-google-map">
+					<div class="google-map" id="google-map">google-map Area</div>
+				</div>
+                    <div class="id-type-div view-flex">
+                        <div class="rep-field rep-field-for-id-and-type">
+                            <h3>Incident ID: <span id="incident-id"></span></h3>
+                        </div>
+                        <div class="rep-field rep-field-for-id-and-type">
+                            <h3>Incident Type: <span id="incident-type"></span></h3>
+                        </div>
+                    </div>
+
+                    <div class="lat-long view-flex">
+                        <div class="rep-field rep-field-for-id-and-type" id="rep-field-for-address">
+							<h3> Location: <span id="location"></span></h3>
+                        </div>
+                        <div class="rep-field rep-field-for-id-and-type ">
+							<h3> Report Status: <span id="report-status"></span>
+							<span id="edit-status"><a href="edit-status.html">Edit Status</a></span>
+							</h3>
+                        </div>
+                    </div>
+                    <div class="view-flex" id="form-group-last-child">
+                        <div class="rep-field">
+						    <label for="comment" class="form-label">Comments</label>
+                            <div class="comment-body" id="comment-body"></div>
+                        </div>
+                    </div>
+
+                    <div class="img-collection-container">
+                        <span class="form-label view-form-label form-label-images">Images</span>
+
+                        <div class="img-file-input-container" class="img-file-input-container">
+                            <img src=""  id="report-image"/>
+                        </div>
+                    </div>
+
+                    <div class="vid-collection-container">
+                        <span class="form-label view-form-label form-label-videos">Videos</span>
+                        <div class="vid-file-input-container" class="vid-file-input-container">
+                            <video src="" id="report-video"/>
+                        </div>
+                    </div>
+            </div>
+            
         </div>
     </section>
-<!-- End profile Section -->
+<!-- End view report Section -->
 <!-- Begin footer Section -->
 <footer class="mb-1">
     <div>
@@ -38,7 +83,7 @@
     </div>
  </footer>
  <!-- End footer Section -->
- <script src="static/js/main.js"></script>
- <script src="static/js/report.js"></script>
+ <script src="js/main.js"></script>
+ <script src="js/report.js"></script>
 </body>
 </html>

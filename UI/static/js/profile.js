@@ -4,14 +4,15 @@ if(!sessionStorage.token) {
 
 //get user details
 const token = sessionStorage.token;
-console.log(token);
 const user_firstname = sessionStorage.firstname || '';
 const user_lastname = sessionStorage.lastname || '';
 const user_username = sessionStorage.username || '';
 const user_email = sessionStorage.email || '';
 const user_gender = sessionStorage.gender || '';
 const user_phonenumber = sessionStorage.phonenumber || '';
-const profilePicture = sessionStorage.userPicture;
+const profilePicture = sessionStorage.profile_pic;
+
+console.log(profilePicture);
 
 //get fields by ids
 const email = document.getElementById('email');
@@ -20,18 +21,19 @@ const fullname = document.getElementById('fullname');
 const phonenumber = document.getElementById('phonenumber');
 const gender = document.getElementById('gender');
 const profile_pic = document.getElementById('profile-picture');
+const picture_img = document.getElementById('picture-img');
 // The date atop the profile page
 const date = document.getElementById('date');
 date.innerHTML = (new Date()).toLocaleString();
 
 //incident fields
-const count_redflags = document.getElementById('total-redflag');
+const count_redflags = document.getElementById('count-redflags');
 const drafted_redflags = document.getElementById('drafted-redflags');
 const ui_redflags = document.getElementById('ui-redflags');
 const resolved_redflags = document.getElementById('resolved-redflags');
 const rejected_redflags = document.getElementById('rejected-redflags');
 
-const count_interventions = document.getElementById('total-interventions');
+const count_interventions = document.getElementById('count-interventions');
 const drafted_interventions = document.getElementById('drafted-interventions');
 const ui_interventions = document.getElementById('ui-interventions');
 const resolved_interventions = document.getElementById('resolved-interventions');
@@ -51,7 +53,7 @@ const getUserProfileDetails = async () => {
 		};
 
     const redflags_url = `${rootURL}/red-flags`;
-    const interventions_url = `${rootURL}/interventions`;
+    const interventions_url = `${rootURL}/interventions`
  
     try {
         const redflags_response = await fetch(redflags_url, options);
@@ -75,11 +77,20 @@ let profileDetails = async () => {
 	
 	const interventions_data = user_records.interventions;
     const redflags_data = user_records.redflags;
+	
+	//console.log(interventions_data);
 
     fullname.textContent = `${user_firstname} ${user_lastname}`;
     email.textContent = user_email;
-	//username.textContent = user_username
-	phonenumber.textContent = user_phonenumber
+	username.textContent = user_username
+	//profilePicture.src = profilePicture;
+	const image = document.createElement("img");
+	const imageParent = document.getElementById("picture-div-img");
+	image.id = "id";
+	image.className = "class";
+	image.src = profilePicture;            // image.src = "IMAGE URL/PATH"
+	imageParent.appendChild(image);
+	//phonenumber.textContent = user_phonenumber
 	//gender.textContent = user_gender
 	if(redflags_data.length > 0){
 		count_redflags.textContent = redflags_data.length;

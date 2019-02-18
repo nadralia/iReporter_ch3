@@ -34,6 +34,7 @@ class DatabaseConnection:
                     phonenumber VARCHAR(14) UNIQUE NOT NULL,
                     gender VARCHAR(14) NOT NULL,
                     is_admin VARCHAR(14) DEFAULT 'False',
+                    profile_pic VARCHAR(255),
                     registered TIMESTAMP WITH TIME ZONE DEFAULT now(),
                     updatedOn TIMESTAMP WITH TIME ZONE DEFAULT now()
              )
@@ -48,7 +49,7 @@ class DatabaseConnection:
                     status VARCHAR(50) DEFAULT 'drafted', 
                     latitude VARCHAR(25) NOT NULL,
                     longitude VARCHAR(25) NOT NULL,
-                    images VARCHAR(100),
+                    images VARCHAR(255),
                     videos VARCHAR(100),
                     comment VARCHAR(255) NOT NULL,
                     deleted VARCHAR(14) DEFAULT 'False',
