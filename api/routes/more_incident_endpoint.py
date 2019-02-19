@@ -101,11 +101,21 @@ class EditStatus(MethodView):
                 status = data.get("status") 
                 updated_status = incident_controller.update_status(incident_id,status)
                 if updated_status:
-                        return jsonify({
-                            "message":
-                                "incident status successfully updated.",
-                                "incident": incident_controller.get_single_incident(incident_id=incident_id)
-                        }), 200
+                    response = (
+                            jsonify(
+                                {
+                                    "status": 200,
+                                    "data": [
+                                        {
+                                            "incident": incident_controller.get_single_incident(incident_id=incident_id),
+                                            "message": "incident status successfully updated.",
+                                        }
+                                    ],
+                                }
+                            ),
+                            201,
+                        )
+                    return response
                 return jsonify({"message": "incident not updated or doesn't exist"}), 400
             else:
                 return jsonify({"message": "Only Admin can edit a status of incident"}), 400

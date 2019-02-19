@@ -35,6 +35,13 @@ const report_video = document.getElementById('report-video');
 		var item_count = Object.keys("incident_details").length;
        
         if (item_count > 0){
+			
+			const image = document.createElement("img");
+			const imageParent = document.getElementById("report-div-img");
+			image.id = "id";
+			image.className = "img_class";
+			image.src = data['incident_details']['images'];            // image.src = "IMAGE URL/PATH"
+			imageParent.appendChild(image);
             
             // set values
 			const latitude = data['incident_details']['latitude'];

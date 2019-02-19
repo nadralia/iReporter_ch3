@@ -84,9 +84,7 @@ image_file.addEventListener('change', function(event){
 				videos: video_file.files[0].name,
 				comment: comment.value
 			};
-			console.log(userData)
-			
-			console.log(formdata)
+
 			
 			let options = {
 				method: 'POST',

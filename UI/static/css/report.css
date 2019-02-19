@@ -14,7 +14,14 @@
     margin: 5px;
 
 }
-
+.img-file-input-container{
+	width:200px;
+	height:30px;
+}
+.img_class{
+    width:200px;
+	height:30px;
+}
 .div-over-map-incident {
     margin: 1rem auto;
     width: 70%;

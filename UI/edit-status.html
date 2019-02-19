@@ -16,9 +16,6 @@
 				<h1 class="logo-name">i<span class="green-color">Reporter</span></h1>
 			</div>
 			<div class="nav">
-                <a class="login-link" href="create-report.html">Create Report</a>
-                <a class="signup-link"href="view-reports.html">My Reports</a>
-                <a class="signup-link" href="profile.html">Profile</a>
                 <a class="signup-link sign-out" href="index.html">Log out</a>
 			</div>
 		</div>
@@ -27,6 +24,8 @@
   <!-- Begin edit report Section -->
      <section class="edit-report">
         <div class="edit-report-flex-box">
+			<span class="error" id="error"></span>
+			  <span class="success" id="success"></span>
             <div class="div-over-form-edit">
                 <form action="#" class="edit-form" id="edit-form">
                     <div class="id-type-div edit-flex">
@@ -42,7 +41,7 @@
                     </div>
 					<div id="radio-container" class= "edit-flex">
 						<h3> Report Status: <span id="report-status"></span></h3>
-						<select id="incident_type">
+						<select id="select_status">
 							<option>Change Report Status</option>
 							<option value="drafted">Drafted</option>
 							<option value="under investigation">Under Investigation</option>
@@ -52,7 +51,7 @@
                     </div>
                     <div class="edit-flex" id="incident-input-flex-for-btn">
                         <div class="div-incident-form-btn">
-                            <button class="btn" id="edit-incident-btn">Edit Status</button>
+                            <button class="btn" id="edit-status-btn">Edit Status</button>
                         </div>
                     </div>
                 </form>
@@ -69,7 +68,7 @@
     </div>
  </footer>
  <!-- End footer Section -->
-<script src="js/main.js"></script>
-<script src="js/edit_report.js"></script>
+<script src="static/js/main.js"></script>
+<script src="static/js/edit_status.js"></script>
 </body>
 </html>

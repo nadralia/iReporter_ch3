@@ -19,8 +19,6 @@ const btnEditComment = document.getElementById('btn-edit-comment');
 const btnEditLocation = document.getElementById('btn-edit-location');
 const btnUpdateIncident = document.getElementById('edit-incident-btn');
 
-
-
 {
 	
 	const url  = `${rootURL}/incidents/${incident_id}`;
@@ -70,54 +68,6 @@ const displayContents = (data) => {
 
 };
 
-
-const getRequestObj = (str) => {
-    const formdata = new FormData();
-    const myHeaders = new Headers();
-    const uri = `${rootURL}/incidents/${recordId}/${str}`;
-    const images = imgFileInput.files;
-    const videos = vidFileInput.files;
-
-    myHeaders.append('x-auth-token', token);
-
-    switch(str) {
-        case('updateIncident'):
-            formdata.append('location', coords.value);
-            break;
-		case('location'):
-            formdata.append('location', coords.value);
-            break;
-        case('comment') : 
-            formdata.append('comment', comment.value);
-            break;
-        case('editImage') :
-            if (images.length > 0) {
-                for (let i = 0; i < images.length; i += 1) {
-                    formdata.append('images', images[i]);
-                }
-            }
-            break;
-        case('editVideo') : 
-            if (videos.length > 0) {
-                for (let i = 0; i < videos.length; i += 1) {
-                    formdata.append('videos', videos[i]);
-                }
-            }
-            break;
-    }
-
-    const options = {
-        method: 'PATCH',
-        mode: 'cors',
-        headers: myHeaders,
-        body: formdata,
-    };
-
-    const request = new Request(uri, options);
-
-    return request;
-};
-
 const updateIncident =  () =>{
 	const req = getRequestObj('updateIncident');
     fetch(req)
@@ -140,20 +90,47 @@ const updateIncident =  () =>{
 }
 
 const patchComment = () => {
-    const req = getRequestObj('comment');
+    let incident_comment = {
+		comment: comment.value
+	};
+	const comment_url  = `${rootURL}/incidents/${incident_id}/comment`;
+			
+	let options = {
+		method: 'PATCH',
+		headers: {
+			'Content-type':'application/json',
+			Authorization: `Bearer ${token}`
+				},
+		mode: 'cors',
+		body: JSON.stringify(incident_comment)
+	}
+			
+	let req = new Request(comment_url,options);
+	
     fetch(req)
         .then(response => {
             return response.json();
         })
-        .then(response => {
-            if (response.status === 200) {
+        .then(data => {
+            if (data.status === 400) {
+                //validation error
+                error.style.display = "block";
+                error.innerHTML = data.message;
 
-                // reload the page after 3 seconds
-                setTimeout(() => {
-                    window.location.reload(false);
-                }, 2000);
-            } else {
-            }
+            } else if (data.status === 200) {
+				success.style.display = "block";
+				success.innerHTML = data["data"][0].message;
+				setTimeout(()=> {
+						redirect:window.location.reload(true);
+						}, 1000);
+				
+
+            }else if(data.message ==="Signature has expired"){
+				redirect:window.location.replace('./login.html');
+			}
+			else{
+				throw new Error(data.error);
+			}
         })
         .catch(err => {
          console.log(err);
@@ -161,64 +138,54 @@ const patchComment = () => {
 };
 
 const patchLocation = () => {
-    const req = getRequestObj('location');
+    let incident_status = {
+		status: status_field.value
+	};
+	const status_url  = `${rootURL}/incidents/${incident_id}/location`;
+			
+	let options = {
+		method: 'PATCH',
+		headers: {
+			'Content-type':'application/json',
+			Authorization: `Bearer ${token}`
+				},
+		mode: 'cors',
+		body: JSON.stringify(incident_status)
+	}
+			
+	let req = new Request(status_url,options);
+	
     fetch(req)
     .then(response => {
         return response.json();
     })
     .then(response => {
-        if (response.status === 200) {
+        if (data.status === 400) {
+                //validation error
+                error.style.display = "block";
+                error.innerHTML = data.message;
 
-            // reload the page after 3 seconds
-            setTimeout(() => {
-                window.location.reload(false);
-            }, 3000);
-        } else {
-        }
+            } else if (data.status === 200) {
+				success.style.display = "block";
+				success.innerHTML = data["data"][0].message;
+				setTimeout(()=> {
+						redirect:window.location.reload(true);
+						}, 1000);
+				
+
+            }else if(data.message ==="Signature has expired"){
+				redirect:window.location.replace('./login.html');
+			}
+			else{
+				throw new Error(data.error);
+			}
     })
     .catch(err => {
 		console.log(err);
     });
 };
 
-const changeImage = () => {
-    const req = getRequestObj('editImage');
-    fetch(req)
-    .then(response => {
-        return response.json();
-    })
-    .then(response => {
-        if(response.status === 200) {
-            setTimeout(() => {
-                window.location.reload(false);
-            }, 2000);
-        } else {
-        }
-    })
-    .catch(err => {
-    });
 
-};
-
-const changeVideo = () => {
-    const req = getRequestObj('editVideo');
-    fetch(req)
-    .then(response => {
-        return response.json();
-    })
-    .then(response => {
-        if(response.status === 200) {
-            setTimeout(() => {
-                window.location.reload(false); // reload the page after 2 seconds
-            }, 2000);
-        } else {
-        }
-    })
-    .catch(err => {
-
-    });
-
-};
 
 btnUpdateIncident.addEventListener('click', (event) => {
     event.preventDefault();
@@ -236,13 +203,4 @@ btnEditLocation.addEventListener('click', (event) => {
 
 });
 
-btnEditImages.addEventListener('click', (event) => {
-    event.preventDefault();
-
-});
-
-btnEditVideos.addEventListener('click', (event) => {
-    event.preventDefault();
-
-});
 
