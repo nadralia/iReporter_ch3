@@ -1,4 +1,4 @@
-const rootURL = 'http://127.0.0.1:5000/api/v2';
+const rootURL = 'https://dbireporter.herokuapp.com/api/v2';
 const cloudary_URL = 'https://api.cloudinary.com/v1_1/nadralia/image/upload';
 const cloudinary_upload_preset = 'ieuvgsby';
 
