@@ -38,9 +38,8 @@ class BaseTestCase(unittest.TestCase):
         self.phonenumber,self.gender,self.is_admin,self.profile_pic)
         
     def register_reporter(self):
-        user_controller.create_new_user("adralia","nelson","mandela","nelsonadralia@gmail.com", 
-                         "nadralia7","nadra29#liAM","0703-000001",
-                                  "Male","False","profile.jpg")
+        user_controller.create_new_user("nelsonadralia@gmail.com", 
+                         "nadralia7","nadra29#liAM","False")
 
     def admin_header(self):
        token = generate_token(self.username, self.is_admin)

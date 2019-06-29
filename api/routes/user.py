@@ -16,25 +16,16 @@ user_blueprint = Blueprint("user_blueprint", __name__)
 class RegisterUser(MethodView):
     def post(self):
         data = request.get_json()
-        search_keys = ("firstname", "lastname", "othernames" ,"email", "username", 
-        "password", "phonenumber","gender")
+        search_keys = ("email", "username", "password")
         if all(key in data.keys() for key in search_keys):
-            firstname = data.get("firstname")
-            lastname = data.get("lastname")
-            othernames = data.get("othernames")
             email = data.get("email")
             username = data.get("username")
             password = data.get("password")
-            phonenumber = data.get("phonenumber")
-            gender = data.get("gender")
             is_admin = data.get("is_admin")
-            profile_pic = data.get("profile_pic")
-
             hashed_password = generate_password_hash(password, method='sha256')
-
             #validate user details 
             invalid_password = validate.validate_password(password)
-            invalid = validate.validate_user_details(username,email,gender)
+            invalid = validate.validate_user_details(username,email)
             if invalid:
                 return jsonify({"message": invalid, "status": 400}), 400
             if invalid_password != True :
@@ -43,9 +34,8 @@ class RegisterUser(MethodView):
             if username_exists:
                 return jsonify({"message": "username exists", "status": 409}), 409
             
-            new_user = user_controller.create_new_user(firstname=firstname, lastname=lastname,
-                    othernames=othernames,email=email,username=username, password=hashed_password, 
-                    phonenumber=phonenumber, gender=gender, is_admin=is_admin,profile_pic=profile_pic) 
+            new_user = user_controller.create_new_user(email=email,username=username, password=hashed_password,
+            is_admin=is_admin) 
             
             if new_user:
                 user = user_controller.get_user(username=username)

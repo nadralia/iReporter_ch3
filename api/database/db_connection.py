@@ -25,14 +25,14 @@ class DatabaseConnection:
             """
              CREATE TABLE IF NOT EXISTS users (
                     user_id SERIAL PRIMARY KEY NOT NULL,
-                    firstname VARCHAR (40) NOT NULL,
-                    lastname VARCHAR (40) NOT NULL,
+                    firstname VARCHAR (40),
+                    lastname VARCHAR (40),
                     othernames VARCHAR(40),
                     email VARCHAR(60) UNIQUE NOT NULL,
                     username VARCHAR (40) UNIQUE NOT NULL,
                     password VARCHAR(255) NOT NULL,
-                    phonenumber VARCHAR(14) UNIQUE NOT NULL,
-                    gender VARCHAR(14) NOT NULL,
+                    phonenumber VARCHAR(14) UNIQUE,
+                    gender VARCHAR(14),
                     is_admin VARCHAR(14) DEFAULT 'False',
                     profile_pic VARCHAR(255),
                     registered TIMESTAMP WITH TIME ZONE DEFAULT now(),

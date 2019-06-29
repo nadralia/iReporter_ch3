@@ -51,14 +51,12 @@ class Validation:
         else:
             return True
 
-    def validate_user_details(self, username,email,gender):
+    def validate_user_details(self, username,email):
         """ Validates user fields"""
         if not re.match(r"([\w\.-]+)@([\w\.-]+)(\.[\w\.]+$)",email):
             return "Invalid email format"
         if not re.match(r"([a-zA-Z0-9]*$)", username):
             return "Only alphanumerics allowed in user name"
-        if gender != 'Male' and gender != 'Female':
-            return "Gender must be either Male or Female"
         if not username or username == " ":
             return "usename is missing"
             

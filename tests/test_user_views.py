@@ -29,25 +29,6 @@ class TestUserViews(BaseTestCase):
         """Tests that the user is registered and logs in as reporter"""
         pass
 
-    def test_registration_with_missing_keys(self):
-        """ Test for missing keys """
-        user_data = {
-            "lastname": "ireporter",
-            "othernames": "",
-            "email": "adminireporter@gmail.com",
-            "username": "admin007",
-            "password": "nadra2526#A",
-            "phonenumber": "+256779004531",
-            "gender": "Male",
-            "is_admin":"True"
-        }
-        response = self.app.post('api/v2/auth/signup',
-                                    content_type='application/json',
-                                    data=json.dumps(user_data))
-        msg = json.loads(response.data)
-        self.assertIn("Please provide the correct keys for the data", msg['message'])
-        self.assertEqual(response.status_code, 400)
-
     def test_registration_with_wrong_username(self):
         """Test usename is missing"""
         user_data = {

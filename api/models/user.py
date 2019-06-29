@@ -3,28 +3,19 @@ from api.database.db_connection import DatabaseConnection
 class UserModel:
     def __init__(self, **kwargs):
         """ stores user details """
-        self.firstname = kwargs.get('firstname')
-        self.lastname = kwargs.get('lastname')
-        self.othernames = kwargs.get('othernames')
         self.email = kwargs.get('email')
         self.username = kwargs.get('username')
         self.password = kwargs.get('password')
-        self.phonenumber = kwargs.get('phonenumber')
-        self.gender = kwargs.get('gender')
         self.is_admin = kwargs.get('is_admin')
-        self.profile_pic = kwargs.get('profile_pic')
         self.connect = DatabaseConnection()
         self.cursor = self.connect.dict_cursor
 
-    def add_new_user(self,firstname, lastname, othernames,email, username, 
-        password,phonenumber,gender,is_admin,profile_pic):
+    def add_new_user(self,email, username,password,is_admin):
         """ insert a new user in table users"""
         query = (
-            """INSERT INTO users (firstname, lastname,othernames, email,username, 
-            password,phonenumber,gender, is_admin,profile_pic) 
-            VALUES ('{}', '{}', '{}', '{}','{}', '{}', '{}', '{}', '{}', '{}'
-            )""".format(firstname,lastname,othernames,email, username,password,
-            phonenumber,gender,is_admin,profile_pic))
+            """INSERT INTO users (email,username,password,is_admin) 
+            VALUES ('{}', '{}', '{}', '{}'
+            )""".format(email, username,password,is_admin))
 
         self.cursor.execute(query)
 

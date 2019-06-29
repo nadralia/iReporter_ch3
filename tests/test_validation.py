@@ -103,25 +103,15 @@ class TestValidation(unittest.TestCase):
         """Tests to ensure the correct data definition passes"""
         username = "Adralia"
         email = "nadralia@gmail.com"
-        gender = "Male"
-        self.assertEqual(self.validation.validate_user_details(username,email,gender), 
+        self.assertEqual(self.validation.validate_user_details(username,email), 
          None)
 
     def test_validate_invalid_email(self):
         """Tests to ensure the correct data definition passes"""
         username = "Adralia"
         email = "nadraliagmail.com"
-        gender = "Male"
-        self.assertEqual(self.validation.validate_user_details(username,email,gender), 
+        self.assertEqual(self.validation.validate_user_details(username,email), 
          "Invalid email format")
-
-    def test_validate_invalid_gender(self):
-        """Tests to ensure the correct data definition passes"""
-        username = "Adralia"
-        email = "nadralia@gmail.com"
-        gender = "ale"
-        self.assertEqual(self.validation.validate_user_details(username,email,gender), 
-         "Gender must be either Male or Female")
 
     def test_validate_login(self):
         """Tests to ensure the correct data definition passes"""
